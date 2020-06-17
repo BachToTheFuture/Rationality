@@ -46,7 +46,7 @@ const App: React.FC = () => (
           <Route path="/tab3" component={Tab3} exact={true} />
           <Route path="/tab4" component={Tab4} exact={true} />
           <Route path="/tab5" component={Tab5} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route path="/" render={() => <Redirect to="/tab3" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
