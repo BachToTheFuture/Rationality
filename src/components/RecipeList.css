@@ -1,0 +1,25 @@
+
+.recipe-label {
+    margin-right:10px;
+    font-weight:bold;
+}
+
+.vert-align {
+    vertical-align:middle;
+}
+
+.searchbar-input {
+    background: rgba(255,255,255,0.1) !important;
+    border-radius: 10px !important;
+    height: 40px !important;
+    font-size: 1.25em !important;
+    transition:0.2 all ease;
+}
+.searchbar-input:focus {
+    background: rgba(255,255,255,0.2) !important;
+    transition:0.2 all ease;
+}
+
+ion-icon {
+    font-size:20px;
+}

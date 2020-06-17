@@ -85,8 +85,8 @@ http://ionicframework.com/docs/theming/ */
   */
 
 body {
-  --ion-color-primary: #428cff;
-  --ion-color-primary-rgb: 66,140,255;
+  --ion-color-primary: #ffa1a1;
+  --ion-color-primary-rgb: 255, 161, 161;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;
   --ion-color-primary-shade: #3a7be0;
@@ -228,13 +228,32 @@ body {
   --ion-tab-bar-background: #1f1f1f;
 }
 
-body, html {
+html * {
   font-family: 'Montserrat', sans-serif;
 }
 
-.title {
+.welcome {
+  padding:30px;
   padding-top: 30px;
-  font-size: 30px;
+  padding-bottom:0;
+  font-size: 40px;
   font-weight:500;
   font-family: 'Montserrat', sans-serif;
+  background: -webkit-linear-gradient(0deg,#c496ff,#ff8a8a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.usertitle {
+  padding:30px;
+  padding-top:0;
+  font-size: 50px;
+  font-weight:500;
+  font-family: 'Montserrat', sans-serif;
+  background: -webkit-linear-gradient(0deg,#b67eff,#ff8a8a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+ion-tab-bar {
+  background:transparent;
 }

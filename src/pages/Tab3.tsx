@@ -8,7 +8,8 @@ const Tab3: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonTitle size="large" class="title">Welcome<br></br><b>BunPillo!</b></IonTitle>
+        <IonTitle size="large" class="welcome">Good morning,</IonTitle>
+        <IonTitle size="large" class="usertitle"><b>BunPillo!</b></IonTitle>
         <HelpContainer/>
       </IonContent>
     </IonPage>

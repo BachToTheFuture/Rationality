@@ -6,7 +6,6 @@ import './HelpContainer.css';
 const HelpContainer: React.FC = () => {
   return (
     <div className="container">
-      <strong>Helpful tips/intro go here</strong>
       <IonCard>
           <IonCardHeader>
             <IonCardTitle>Your profile</IonCardTitle>
