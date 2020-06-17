@@ -1,2 +1,2 @@
 # Rationality
-# Where we put the ration in rationality
+Where we put the ration in rationality
