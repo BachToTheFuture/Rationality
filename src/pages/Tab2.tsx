@@ -1,9 +1,42 @@
-import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCheckbox, IonList, IonItem, IonLabel, IonItemDivider  } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
 
-const Tab2: React.FC = () => {
+const checkboxList = [
+  { val: 'Pepperoni', isChecked: false },
+  { val: 'Sausage', isChecked: false },
+  { val: 'Mushroom', isChecked: false },
+  { val: 'Bread', isChecked: false }
+];
+
+export const Tab2: React.FC = () => {
+
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Shopping List</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonList>
+          <IonItemDivider>For: June[x] - June[x]</IonItemDivider>
+          {checkboxList.map(({ val, isChecked }, i) => (
+            <IonItem key={i}>
+              <IonLabel>{val}</IonLabel>
+              <IonCheckbox slot="end" color="secondary" value={val} checked={isChecked} />
+            </IonItem>
+          ))}
+        </IonList>
+      </IonContent>
+    </IonPage>
+  );
+};
+
+/*const Tab2: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -22,5 +55,6 @@ const Tab2: React.FC = () => {
     </IonPage>
   );
 };
+*/
 
 export default Tab2;
