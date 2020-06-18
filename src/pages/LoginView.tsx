@@ -5,6 +5,7 @@ import { IonRow, IonButton, IonIcon, IonContent, IonHeader, IonPage, IonTitle, I
 import { ellipse, lockOpen, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 
 import { set } from "../storage";
+import "./LoginView.css";
 
 class LoginView extends React.Component {
     state = {
@@ -51,10 +52,11 @@ class LoginView extends React.Component {
             <IonRow>
             <input className="textbox" onChange={handlePassword} id="password" type="password" name="password" placeholder="Password"></input>
             </IonRow>
-            <IonButton type="submit">
-                <IonIcon slot="start" icon={lockOpen} />
-                Login
+            <IonButton type="submit" class="center" shape="round">
+              <IonIcon slot="start" icon={lockOpen} />
+              Login
             </IonButton>
+            
         </form>
     </div>
          </div>
