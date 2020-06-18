@@ -75,7 +75,7 @@ class Tab2 extends React.Component {
       )
     }
     return (
-      <div className="container">
+      <IonContent>
         <IonTitle size="large" class="welcome"><b>Shopping List</b></IonTitle>
           <br></br>
           <IonCard>
@@ -93,7 +93,7 @@ class Tab2 extends React.Component {
               </IonList>
             </IonCardContent>
           </IonCard>
-      </div>
+      </IonContent>
     );
   };
 }
