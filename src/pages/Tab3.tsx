@@ -79,6 +79,15 @@ class Tab3 extends React.Component {
           <IonTitle size="large" class="welcome">Good morning,</IonTitle>
           <IonTitle size="large" class="usertitle"><b>{user_data["success"]["name"]}!</b></IonTitle>
           <div>
+          <IonCard>
+                <IonCardHeader>
+                  <IonCardTitle>Your Profile</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                  Blah some user content/data here...
+                  <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
+                </IonCardContent>
+              </IonCard>
             <IonCard>
                 <IonCardHeader>
                   <IonCardTitle>Your favorites</IonCardTitle>
@@ -87,38 +96,7 @@ class Tab3 extends React.Component {
                 {list.map(block => <RecipeCard pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
                 </IonCardContent>
               </IonCard>
-              <IonCard>
-                <IonCardContent>
-                  Help Directory:
-                </IonCardContent>
-                <IonItem className="ion-activated">
-                  <IonIcon icon={calendar} slot="start" />
-                  <IonLabel> Calendar </IonLabel>
-                </IonItem>
-
-                <IonItem>
-                  <IonIcon icon={newspaper} slot="start" />
-                  <IonLabel>Shopping List</IonLabel>
-                </IonItem>
-
-                <IonItem className="ion-activated">
-                  <IonIcon icon={personCircle} slot="start" />
-                  <IonLabel>Profile</IonLabel>
-                </IonItem>
-
-                <IonItem>
-                  <IonIcon icon={nutrition} slot="start" />
-                  <IonLabel>Recipes</IonLabel>
-                </IonItem>
-
-                <IonItem>
-                  <IonIcon icon={statsChart} slot="start" />
-                  <IonLabel>Dashboard</IonLabel>
-                </IonItem>
-              </IonCard>
           </div>
-          
-          <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
         </IonContent>
       </IonPage>
     );
