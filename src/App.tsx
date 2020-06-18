@@ -1,13 +1,7 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs, IonContent
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import MainView from './pages/MainView';
