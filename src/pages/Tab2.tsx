@@ -2,7 +2,6 @@ import React from 'react';
 import { IonHeader, IonToolbar, IonList, IonItemDivider, IonItem, IonLabel, IonCheckbox, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
 import HelpContainer from '../components/HelpContainer';
 import './Tab2.css';
-import RecipeList from '../components/RecipeList';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
 
@@ -21,7 +20,7 @@ class Tab2 extends React.Component {
     get("login").then(data => {
       user_data = data;
       // If user is authenticated
-      if (data.success) {
+      if (data && data.success) {
         this.setState({
           loading: 0
         });
@@ -32,6 +31,7 @@ class Tab2 extends React.Component {
       }
       // This makes it redirect to login.
       else {
+        alert("NOT AUTHENTICATED");
         this.setState({
           loading: -1
         });

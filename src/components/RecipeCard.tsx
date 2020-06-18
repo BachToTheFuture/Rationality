@@ -2,8 +2,10 @@ import React from 'react';
 import { IonContent, IonSearchbar, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import { people, calendarOutline, heart, heartOutline, speedometer,alarm, wine, warning, walk } from 'ionicons/icons';
 import './RecipeCard.css';
+import { set, get } from "../storage";
 
 interface RecipeCardProps {
+    uid: string;
     name: string;
     time: string;
     diff: string;
@@ -11,7 +13,18 @@ interface RecipeCardProps {
     favorite: boolean;
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({name, time, diff, serv, favorite}) => {
+function handleAdd(name, uid) {
+    let uri = "https://Rationality--bach5000.repl.co/add/"+uid+"/"+name
+    fetch(uri).then(response => response.json()).then(content => {
+        console.log(content);
+        if (content.success) {
+            // Update user data
+            set("login", content);
+        }
+    })
+}
+
+const RecipeCard: React.FC<RecipeCardProps> = ({uid, name, time, diff, serv, favorite}) => {
     var src = "https://source.unsplash.com/900x500/?" + name;
     var classes = favorite ? "liked":"";
 
@@ -22,7 +35,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({name, time, diff, serv, favorite
                 <IonCardHeader>
                     <IonCardTitle><b>{name}</b></IonCardTitle>
                     <span className="vert-align">
-                        <a href={"#"+name}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
+                        <a onClick={e=>{handleAdd(name, uid)}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
                         <IonLabel className="recipe-label"> {favorite?"In your cookbook":"Add to cookbook"} </IonLabel>
                     </span>
                     <span className="vert-align">

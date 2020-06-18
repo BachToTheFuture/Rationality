@@ -17,13 +17,14 @@ class Tab3 extends React.Component {
       console.log("DATA ASDFASDF")
       console.log(user_data);
       // If user is authenticated
-      if (data.success) {
+      if (data && data.success) {
         this.setState({
           loading: 0
         });
       }
       // This makes it redirect to login.
       else {
+        alert("NOT AUTHENTICATED");
         this.setState({
           loading: -1
         });
