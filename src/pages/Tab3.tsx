@@ -20,8 +20,6 @@ class Tab3 extends React.Component {
   getData () {
     get("login").then(data => {
       user_data = data;
-      console.log("DATA ASDFASDF")
-      console.log(user_data);
       // If user is authenticated
       if (data && data.success) {
         let content = data["success"]["recipes"];
@@ -37,7 +35,6 @@ class Tab3 extends React.Component {
             favorite: true,
           });
         });
-        console.log(test);
         list = test;
         this.setState({
           loading: 0
@@ -80,7 +77,7 @@ class Tab3 extends React.Component {
     return (
       <IonPage>
         <IonContent>
-          <IonTitle size="large" class="welcome">Good morning,</IonTitle>
+          <IonTitle size="large" class="welcome">Hey there,</IonTitle>
           <IonTitle size="large" class="usertitle"><b>{user_data["success"]["name"]}!</b></IonTitle>
           <div>
           <IonCard>

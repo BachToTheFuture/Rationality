@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonItem, IonCardTitle, IonCardContent, IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonSpinner } from '@ionic/react';
+import { IonButton, IonItem, IonCardTitle, IonCardContent, IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonSpinner } from '@ionic/react';
 import 'react-calendar/dist/Calendar.css';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
@@ -9,6 +9,9 @@ import { Redirect } from 'react-router-dom';
 
 var current_day = "";
 var nice_date_string = "";
+var current_meal = "";
+
+var scheduled_meal = false;
 
 function setDate(value) {
   const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(value)
@@ -17,24 +20,31 @@ function setDate(value) {
   const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(value)
   current_day = `${ye}-${mo}-${da}`
   nice_date_string = `${mo2} ${da}, ${ye}`
+
+  if (user_data && user_data["success"]["schedule"][current_day]) {
+    scheduled_meal = user_data["success"]["schedule"][current_day]
+  }
+  else {
+    scheduled_meal = false;
+  }
 }
 
-function handleSchedule(name, uid,date) {
-  let uri = "https://Rationality--bach5000.repl.co/schedule/"+uid+"/"+name+"/"+date
+function handleSchedule(uid, date, name) {
+  let uri = "https://Rationality--bach5000.repl.co/schedule/"+uid+"/"+date+"/"+name
   fetch(uri).then(response => response.json()).then(content => {
-      console.log(content);
-      if (content.success) {
+    if (content.success) {
           // Update user data
+          console.log(content);
           set("login", content);
       }
   })
+  
 }
 
-setDate(new Date()); // Set date to today.
-
 function handleDayChange(value, event) {
-  console.log(value)
   setDate(value);
+  // If there is food scheduled for a day...
+  
 }
 
 
@@ -56,11 +66,11 @@ class Tab1 extends React.Component {
         Object.keys(content).forEach(x=>{
           test.push(x);
         });
-        console.log(test);
         list = test;
         this.setState({
           loading: 0
         });
+        setDate(new Date()); // Set date to today.
       }
       // This makes it redirect to login.
       else {
@@ -114,14 +124,19 @@ class Tab1 extends React.Component {
                 </IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
+                <span className={scheduled_meal?"mealname":"hide"}>
+                  You scheduled <b>{scheduled_meal["name"]}</b> for today.
+                </span>
+                <hr></hr>
                 <IonItem>
-                <IonLabel>Schedule a meal on this day</IonLabel>
-                <IonSelect>
-                  {list.map((val, i) => (
-                      <IonSelectOption key={i} value={val}>{val}</IonSelectOption>
-                  ))}
-                </IonSelect>
+                  <IonLabel>{scheduled_meal?"Change meal":"Schedule a meal"}</IonLabel>
+                  <IonSelect onIonChange={(e:any) => {current_meal = e.target.value} }>
+                    {list.map((val, i) => (
+                        <IonSelectOption key={i} value={val}>{val}</IonSelectOption>
+                    ))}
+                  </IonSelect>
               </IonItem>
+              <IonButton onClick={(e)=>handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">Schedule</IonButton>
             </IonCardContent>
           </IonCard>
         </IonContent>

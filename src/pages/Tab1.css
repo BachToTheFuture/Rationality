@@ -54,3 +54,13 @@ abbr[title] {
 .react-calendar__month-view__days__day--neighboringMonth {
   background: #333 !important;
 }
+
+.mealname {
+  font-size:16px;
+}
+
+hr {
+  background: linear-gradient(90deg,#c496ff,#ff8a8a) !important;;
+  height:10px;
+  padding:0;
+}

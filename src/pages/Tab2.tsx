@@ -3,10 +3,18 @@ import { IonCard, IonCardHeader, IonCardContent, IonHeader, IonToolbar, IonList,
 import './Tab2.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
 
 var user_data = {}
-
 var checkboxList = [];
+var today = moment();
+var start_week = today.startOf('week').format("MM/DD")
+var end_week = today.endOf('week').format("MM/DD")
+
+function checkWeek(input) {
+  input = moment(input, 'YYYY-MM-DD')
+  return input.isSame(today,"week")
+}
 
 class Tab2 extends React.Component {
   
@@ -23,8 +31,15 @@ class Tab2 extends React.Component {
         });
         // Update shoping list
         let test = []
-        user_data["success"].shopping_list.forEach(x => {
-          test.push({val: x, isChecked: false})
+
+        let now = new Date();
+
+        Object.keys(user_data["success"].schedule).forEach(date => {
+          let t = checkWeek(date)
+          console.log(t)
+          // Check if same week
+          if (t)
+            test.push({val: user_data["success"]["schedule"][date]["name"], isChecked: false})
         })
         checkboxList = test;
       }
@@ -62,7 +77,7 @@ class Tab2 extends React.Component {
           <br></br>
           <IonCard>
             <IonCardHeader>
-              Showing list for <b>this week, June[x]-June[y]</b>
+              Showing list for <b>this week, {start_week}-{end_week}</b>
             </IonCardHeader>
             <IonCardContent>
               <IonList>
