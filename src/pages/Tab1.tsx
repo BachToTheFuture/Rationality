@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import 'react-calendar/dist/Calendar.css';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
 import Calendar from 'react-calendar';
 
+var current_day = "";
+
 function handleDayChange(value, event) {
-  console.log('Clicked day: ' +value)
+  console.log(value)
+  current_day = value.toString();
 }
 
 const Tab1: React.FC = () => {
@@ -27,6 +30,11 @@ const Tab1: React.FC = () => {
             onClickDay={handleDayChange}
             />
         </div>
+        <IonCard>
+          <IonCardHeader>
+              {current_day}
+          </IonCardHeader>
+        </IonCard>
       </IonContent>
     </IonPage>
   );

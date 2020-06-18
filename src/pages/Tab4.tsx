@@ -108,7 +108,7 @@ class Tab4 extends React.Component {
           <div>
           <form onSubmit={this.search}>
           <IonRow>
-              <input placeholder="Search..." className="textbox" type="text" onChange={this.handleQuery}></input>
+              <input placeholder="🔍 Search..." className="textbox" type="text" onChange={this.handleQuery}></input>
           </IonRow>
         </form>
         <Accordion defaultActiveKey="0">

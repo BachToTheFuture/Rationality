@@ -2,5 +2,6 @@
 .textbox {
     margin-left:auto;
     margin-right: auto;
-    width:90% !important;
+    width:100% !important;
+    border-radius:0px !important;
 }

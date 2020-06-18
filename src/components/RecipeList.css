@@ -8,13 +8,6 @@
     vertical-align:middle;
 }
 
-.textbox {
-    background: #222 !important;
-    border-radius: 10px !important;
-    height: 45px !important;
-    font-size: 1em !important;
-    transition:0.2 all ease;
-}
 .textbox:focus {
     background: #444 !important;
     transition:0.2 all ease;
