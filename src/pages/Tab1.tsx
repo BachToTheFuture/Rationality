@@ -9,12 +9,8 @@ const Tab1: React.FC = () => {
   const [value, onChange] = useState(new Date());
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Calendar</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent>
+      <IonTitle size="large" class="welcome"><b>Calendar</b></IonTitle>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Tab 1</IonTitle>
