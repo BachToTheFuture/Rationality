@@ -277,3 +277,55 @@ ion-input:focus {
   background: rgba(255,255,255,0.2) !important;
   transition:0.2 all ease;
 }
+
+.textbox {
+  padding: 15px;
+  margin-bottom:10px;
+  width: 80%;
+  font-size: 17px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right:auto;
+
+}
+.textbox:focus {
+  outline:none;
+}
+
+.hide {
+  display: none;
+}
+
+.big-spinner {
+  color: rgb(255, 163, 163);
+  width:100px;
+  height:100px;
+  -webkit-animation: color_change 0.7s infinite alternate;
+	-moz-animation: color_change 0.7s infinite alternate;
+	-ms-animation: color_change 0.7s infinite alternate;
+	-o-animation: color_change 0.7s infinite alternate;
+	animation: color_change 0.7s infinite alternate;
+}
+@-webkit-keyframes color_change {
+	from { color: #c496ff; }
+	to { color: #ff8a8a; }
+}
+@-moz-keyframes color_change {
+	from { color: #c496ff; }
+	to { color: #ff8a8a; }
+}
+@-ms-keyframes color_change {
+	from { color: #c496ff; }
+	to { color: #ff8a8a; }
+}
+@-o-keyframes color_change {
+	from { color: #c496ff; }
+	to { color: #ff8a8a; }
+}
+@keyframes color_change {
+	from { color: #c496ff; }
+	to { color: #ff8a8a; }
+}
