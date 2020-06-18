@@ -38,8 +38,11 @@ class Tab2 extends React.Component {
           let t = checkWeek(date)
           console.log(t)
           // Check if same week
-          if (t)
-            test.push({val: user_data["success"]["schedule"][date]["name"], isChecked: false})
+          if (t) {
+            user_data["success"]["schedule"][date]["ing"].forEach(x=>{
+                test.push({val: x, isChecked: false})
+            })
+          }
         })
         checkboxList = test;
       }
