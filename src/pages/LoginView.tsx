@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import { IonRow, IonButton, IonIcon, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonItemDivider } from '@ionic/react';
 import { ellipse, lockOpen, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 
+import { set } from "../storage";
+
 class LoginView extends React.Component {
     state = {
       logged_in: false
@@ -19,10 +21,12 @@ class LoginView extends React.Component {
         body: JSON.stringify({'form': {'username': username, 'password':password}})
       }).then(response => response.json()).then(content => {
         console.log(content);
-        if (content.success)
-            this.setState({
-              logged_in: true
-            })
+        if (content.success) {
+          this.setState({
+            logged_in: true
+          });
+          set("login", content);
+        }
         else {
           alert("Not verified!")
         }
@@ -56,7 +60,7 @@ class LoginView extends React.Component {
          </div>
       )
     }
-  }
+}
 
 var username = "";
 var password = "";
