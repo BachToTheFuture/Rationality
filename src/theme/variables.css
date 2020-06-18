@@ -294,3 +294,7 @@ ion-input:focus {
 .textbox:focus {
   outline:none;
 }
+
+.hide {
+  display: none;
+}

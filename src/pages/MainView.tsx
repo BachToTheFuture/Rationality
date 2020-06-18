@@ -28,7 +28,7 @@ const MainView: React.FC = () => (
             <Route path="/tab3" component={Tab3} exact={true} />
             <Route path="/tab4" component={Tab4} exact={true} />
             <Route path="/tab5" component={Tab5} exact={true} />
-            <Route path="/main" render={() => <Redirect to="/tab3" />} exact={true} />
+            <Route path="/main" render={() => <Redirect to="/tab3" />} exact />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="tab1" href="/tab1">
