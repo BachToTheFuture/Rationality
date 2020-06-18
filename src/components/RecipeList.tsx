@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonSearchbar, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
+import { IonRow, IonContent, IonSearchbar, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import { calendarOutline, heartOutline, alarm, wine, warning, walk } from 'ionicons/icons';
 
 import './RecipeList.css';
@@ -22,15 +22,18 @@ class RecipeList extends React.Component {
     fetch(`https://Rationality--bach5000.repl.co/search/`+query)
     .then(response => response.json()).then(content => {
       console.log(content);
-      data = [
-        {
+      let test = [];
+      Object.keys(content).forEach(x=>{
+        test.push({
           component: "RecipeCard",
-          name: "Boba",
-          time: "30 min",
-          diff: "Easy",
-          favorite: true,
-        }
-      ]
+          name: x,
+          time: content[x].data.info.Time,
+          diff: content[x].data.info.Difficulty,
+          serv: content[x].data.info.Servings,
+          favorite: false,
+        });
+      });
+      data = test;
       this.setState({
         search: this.state.search ? 1 : 0
       });
@@ -42,9 +45,11 @@ class RecipeList extends React.Component {
     return (
       <div>
         <form onSubmit={this.search}>
-        <input placeholder="Search..." className="textbox" type="text" onChange={this.handleQuery}></input>
+        <IonRow>
+            <input placeholder="Search..." className="textbox" type="text" onChange={this.handleQuery}></input>
+        </IonRow>
       </form>
-        {data.map(block => <RecipeCard name={block.name} time={block.time} diff={block.diff} favorite={block.favorite}/>)}
+        {data.map(block => <RecipeCard key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
       </div>
     )
   }
