@@ -7,23 +7,6 @@ import { Redirect } from 'react-router-dom';
 
 var user_data = {}
 
-<<<<<<< HEAD
-const Tab3: React.FC = () => {
-  return (
-    <IonPage>
-      <IonContent>
-        <IonTitle size="large" class="welcome">Good morning,</IonTitle>
-        <IonTitle size="large" class="usertitle"><b>BunPillo!</b></IonTitle>
-        <HelpContainer/>
-  
-        {/*-- Anchor --*/}
-        <IonButton class="center" href="#" color="tertiary" shape="round">Sign Out</IonButton>
-      </IonContent>
-    </IonPage>
-  );
-};
-
-=======
 class Tab3 extends React.Component {
   state = {
     loading: 1
@@ -47,7 +30,6 @@ class Tab3 extends React.Component {
       }
     })
   }
->>>>>>> d97de5d5d273d11865592bbe86c54d1fd6ca5713
 
   logout () {
     // Reset stuff
