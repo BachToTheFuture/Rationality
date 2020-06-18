@@ -7,6 +7,9 @@ import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, 
 import { ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 import RecipeCard from '../components/RecipeCard';
 
+import { Button, Accordion, Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 var user_data = {}
 var list = []
 
@@ -30,6 +33,7 @@ class Tab3 extends React.Component {
             time: content[x].info.Time,
             diff: content[x].info.Difficulty,
             serv: content[x].info.Servings,
+            html: content[x].content,
             favorite: true,
           });
         });
@@ -93,7 +97,9 @@ class Tab3 extends React.Component {
                   <IonCardTitle>Your favorites</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
-                {list.map(block => <RecipeCard pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+                <Accordion defaultActiveKey="0">
+                {list.map(block => <RecipeCard html={block.html} pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+                </Accordion>
                 </IonCardContent>
               </IonCard>
           </div>

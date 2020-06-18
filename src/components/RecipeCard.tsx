@@ -59,29 +59,32 @@ const RecipeCard: React.FC<RecipeCardProps> = ({pic, uid, name, time, diff, serv
 
         <Card className={pic?"subcard":"subcard"}>
             <img alt="" className={pic?"":"hide"} alt-text="image" src={pic?src:""}></img>
-            <Card.Header>
-              <Accordion.Toggle as={Button} variant="link" eventKey={name}>
-                <IonCardTitle><b>{name}</b></IonCardTitle>
-              </Accordion.Toggle>
+            <Accordion.Toggle as={Button} eventKey={name}>
+            
+                <b className="cardtitle">{name}</b>
+                <br></br>
               <span className="vert-align">
-                        <a onClick={e=>{handleAdd(name, uid)}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
-                        <IonLabel className="recipe-label"> {favorite?"In your cookbook":"Add to cookbook"} </IonLabel>
-                    </span>
-                    <span className="vert-align">
-                        <IonIcon icon={alarm}/>
-                        <IonLabel className="recipe-label"> {time} </IonLabel>
-                    </span>
-                    <span className="vert-align">
-                        <IonIcon icon={speedometer} />
-                        <IonLabel className="recipe-label"> {diff} </IonLabel>
-                    </span>
-                    <span className="vert-align">
-                        <IonIcon icon={people} />
-                        <IonLabel className="recipe-label"> Serves {serv} </IonLabel>
-                    </span>
-            </Card.Header>
+                <a onClick={e=>{handleAdd(name, uid)}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
+                <IonLabel className="recipe-label"> {favorite?"In your cookbook":"Add to cookbook"} </IonLabel>
+            </span>
+            
+            </Accordion.Toggle>
+
             <Accordion.Collapse eventKey={name}>
                 <Card.Body>
+                <span className="vert-align">
+                <IonIcon icon={alarm}/>
+                <IonLabel className="recipe-label"> {time} </IonLabel>
+                </span>
+                <span className="vert-align">
+                    <IonIcon icon={speedometer} />
+                    <IonLabel className="recipe-label"> {diff} </IonLabel>
+                </span>
+                <span className="vert-align">
+                    <IonIcon icon={people} />
+                    <IonLabel className="recipe-label"> Serves {serv} </IonLabel>
+                </span>
+                <hr></hr>
                 <SanitizeHTML html={html} />
                 </Card.Body>
             </Accordion.Collapse>

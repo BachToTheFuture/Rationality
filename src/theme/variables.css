@@ -339,3 +339,14 @@ ion-card {
   background:#333 !important;
   left:0;
 }
+
+.btn-primary {
+  background: linear-gradient(90deg,#c496ff,#ff8a8a) !important;
+  color: #222 !important;
+  border:none;
+  border-radius:0px;
+}
+
+.cardtitle {
+  font-size:20px;
+}
