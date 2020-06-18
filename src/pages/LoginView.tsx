@@ -22,10 +22,10 @@ class LoginView extends React.Component {
       }).then(response => response.json()).then(content => {
         console.log(content);
         if (content.success) {
+          set("login", content);
           this.setState({
             logged_in: true
           });
-          set("login", content);
         }
         else {
           alert("Not verified!")

@@ -1,7 +1,6 @@
 import React from 'react';
-import { IonSpinner, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonIcon, } from '@ionic/react';
+import { IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
 import HelpContainer from '../components/HelpContainer';
-import { star } from 'ionicons/icons';
 import './Tab3.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
@@ -15,6 +14,7 @@ class Tab3 extends React.Component {
   getData () {
     get("login").then(data => {
       user_data = data;
+      console.log("DATA ASDFASDF")
       console.log(user_data);
       // If user is authenticated
       if (data.success) {
@@ -38,10 +38,11 @@ class Tab3 extends React.Component {
 
   render () {
     // redirect to login.
+    console.log(this.state.loading);
     if (this.state.loading === -1) {
       return <Redirect to="/" exact />
     }
-    if (this.state.loading > 0) {
+    if (this.state.loading === 1) {
       return (
         <IonPage>
           {this.getData()}
