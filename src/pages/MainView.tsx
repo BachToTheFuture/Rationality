@@ -52,7 +52,7 @@ class MainView extends React.Component {
             </IonTabButton>
             <IonTabButton tab="tab5" href="/main/tab5">
               <IonIcon icon={statsChart} />
-              <IonLabel>Dashboard</IonLabel>
+              <IonLabel>Inventory</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
