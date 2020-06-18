@@ -11,6 +11,7 @@ interface RecipeCardProps {
     diff: string;
     serv: string;
     favorite: boolean;
+    pic: boolean;
 }
 
 function handleAdd(name, uid) {
@@ -24,14 +25,13 @@ function handleAdd(name, uid) {
     })
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({uid, name, time, diff, serv, favorite}) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({pic, uid, name, time, diff, serv, favorite}) => {
     var src = "https://source.unsplash.com/900x500/?" + name;
     var classes = favorite ? "liked":"";
-
     // Add "add to my recipes" feature
     return (
-            <IonCard>
-                <img alt="" alt-text="image" src={src}></img>
+            <IonCard className={pic?"subcard":"subcard"}>
+                <img alt="" className={pic?"":"hide"} alt-text="image" src={pic?src:""}></img>
                 <IonCardHeader>
                     <IonCardTitle><b>{name}</b></IonCardTitle>
                     <span className="vert-align">

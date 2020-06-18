@@ -329,3 +329,13 @@ ion-input:focus {
 	from { color: #c496ff; }
 	to { color: #ff8a8a; }
 }
+
+ion-card {
+  box-shadow:none;
+  border-radius:10px;
+}
+
+.subcard {
+  background:#333 !important;
+  left:0;
+}

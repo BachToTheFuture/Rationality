@@ -1,15 +1,18 @@
 import React from 'react';
 import { IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
-import HelpContainer from '../components/HelpContainer';
 import './Tab3.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
+import { ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
+import RecipeCard from '../components/RecipeCard';
 
 var user_data = {}
+var list = []
 
 class Tab3 extends React.Component {
   state = {
-    loading: 1
+    loading: 1,
   }
   getData () {
     get("login").then(data => {
@@ -18,6 +21,20 @@ class Tab3 extends React.Component {
       console.log(user_data);
       // If user is authenticated
       if (data && data.success) {
+        let content = data["success"]["recipes"];
+        let test = [];
+        Object.keys(content).forEach(x=>{
+          test.push({
+            component: "RecipeCard",
+            name: x,
+            time: content[x].info.Time,
+            diff: content[x].info.Difficulty,
+            serv: content[x].info.Servings,
+            favorite: true,
+          });
+        });
+        console.log(test);
+        list = test;
         this.setState({
           loading: 0
         });
@@ -39,7 +56,8 @@ class Tab3 extends React.Component {
 
   render () {
     // redirect to login.
-    console.log(this.state.loading);
+    console.log("DATA STUFF")
+    console.log(list);
     if (this.state.loading === -1) {
       return <Redirect to="/" exact />
     }
@@ -60,7 +78,45 @@ class Tab3 extends React.Component {
         <IonContent>
           <IonTitle size="large" class="welcome">Good morning,</IonTitle>
           <IonTitle size="large" class="usertitle"><b>{user_data["success"]["name"]}!</b></IonTitle>
-          <HelpContainer/>
+          <div>
+            <IonCard>
+                <IonCardHeader>
+                  <IonCardTitle>Your favorites</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                {list.map(block => <RecipeCard pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+                </IonCardContent>
+              </IonCard>
+              <IonCard>
+                <IonCardContent>
+                  Help Directory:
+                </IonCardContent>
+                <IonItem className="ion-activated">
+                  <IonIcon icon={calendar} slot="start" />
+                  <IonLabel> Calendar </IonLabel>
+                </IonItem>
+
+                <IonItem>
+                  <IonIcon icon={newspaper} slot="start" />
+                  <IonLabel>Shopping List</IonLabel>
+                </IonItem>
+
+                <IonItem className="ion-activated">
+                  <IonIcon icon={personCircle} slot="start" />
+                  <IonLabel>Profile</IonLabel>
+                </IonItem>
+
+                <IonItem>
+                  <IonIcon icon={nutrition} slot="start" />
+                  <IonLabel>Recipes</IonLabel>
+                </IonItem>
+
+                <IonItem>
+                  <IonIcon icon={statsChart} slot="start" />
+                  <IonLabel>Dashboard</IonLabel>
+                </IonItem>
+              </IonCard>
+          </div>
           
           <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
         </IonContent>

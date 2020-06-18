@@ -8,15 +8,15 @@
     vertical-align:middle;
 }
 
-.searchbar-input {
-    background: rgba(255,255,255,0.1) !important;
+.textbox {
+    background: #222 !important;
     border-radius: 10px !important;
-    height: 40px !important;
+    height: 45px !important;
     font-size: 1em !important;
     transition:0.2 all ease;
 }
-.searchbar-input:focus {
-    background: rgba(255,255,255,0.2) !important;
+.textbox:focus {
+    background: #444 !important;
     transition:0.2 all ease;
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { IonRow, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
-import HelpContainer from '../components/HelpContainer';
 import './Tab4.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
@@ -108,7 +107,7 @@ class Tab4 extends React.Component {
               <input placeholder="Search..." className="textbox" type="text" onChange={this.handleQuery}></input>
           </IonRow>
         </form>
-          {data.map(block => <RecipeCard uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+          {data.map(block => <RecipeCard pic={true} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
         </div>
       </IonContent>
     </IonPage>

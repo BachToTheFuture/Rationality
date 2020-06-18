@@ -1,15 +1,12 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonList, IonItemDivider, IonItem, IonLabel, IonCheckbox, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
-import HelpContainer from '../components/HelpContainer';
+import { IonCard, IonCardHeader, IonCardContent, IonHeader, IonToolbar, IonList, IonItemDivider, IonItem, IonLabel, IonCheckbox, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
 import './Tab2.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
 
 var user_data = {}
 
-const checkboxList = [
-  
-];
+var checkboxList = [];
 
 class Tab2 extends React.Component {
   
@@ -25,9 +22,11 @@ class Tab2 extends React.Component {
           loading: 0
         });
         // Update shoping list
+        let test = []
         user_data["success"].shopping_list.forEach(x => {
-          checkboxList.push({val: x, isChecked: false})
+          test.push({val: x, isChecked: false})
         })
+        checkboxList = test;
       }
       // This makes it redirect to login.
       else {
@@ -58,21 +57,25 @@ class Tab2 extends React.Component {
       )
     }
     return (
-      <IonPage>
-        <IonContent>
+      <div className="container">
         <IonTitle size="large" class="welcome"><b>Shopping List</b></IonTitle>
-        <br></br>
-          <IonList>
-            <IonItemDivider>For: June[x] - June[x]</IonItemDivider>
-            {checkboxList.map(({ val, isChecked }, i) => (
-              <IonItem key={i}>
-                <IonLabel>{val}</IonLabel>
-                <IonCheckbox slot="end" color="secondary" value={val} checked={isChecked} />
-              </IonItem>
-            ))}
-          </IonList>
-        </IonContent>
-      </IonPage>
+          <br></br>
+          <IonCard>
+            <IonCardHeader>
+              Showing list for <b>June[x] - June[x]</b>
+            </IonCardHeader>
+            <IonCardContent>
+              <IonList>
+              {checkboxList.map(({ val, isChecked }, i) => (
+                <IonItem key={i}>
+                  <IonLabel>{val}</IonLabel>
+                  <IonCheckbox slot="end" color="secondary" value={val} checked={isChecked} />
+                </IonItem>
+              ))}
+              </IonList>
+            </IonCardContent>
+          </IonCard>
+      </div>
     );
   };
 }

@@ -36,18 +36,23 @@ class MainView extends React.Component {
           <IonTabBar slot="bottom">
             <IonTabButton tab="tab1" href="/main/tab1">
               <IonIcon icon={calendar} />
+              <IonLabel>Calendar</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab2" href="/main/tab2">
               <IonIcon icon={newspaper} />
+              <IonLabel>Shopping List</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab3" href="/main/tab3">
               <IonIcon icon={personCircle} />
+              <IonLabel>Profile</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab4" href="/main/tab4">
               <IonIcon icon={nutrition} />
+              <IonLabel>Recipes</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab5" href="/main/tab5">
               <IonIcon icon={statsChart} />
+              <IonLabel>Dashboard</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
