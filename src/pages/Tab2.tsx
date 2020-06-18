@@ -62,7 +62,7 @@ class Tab2 extends React.Component {
           <br></br>
           <IonCard>
             <IonCardHeader>
-              Showing list for <b>June[x] - June[x]</b>
+              Showing list for <b>this week, June[x]-June[y]</b>
             </IonCardHeader>
             <IonCardContent>
               <IonList>

@@ -48,9 +48,7 @@ class Tab4 extends React.Component {
     });
     fetch(`https://Rationality--bach5000.repl.co/search/`+query)
     .then(response => response.json()).then(content => {
-      console.log(content);
       let test = [];
-      console.log(user_data["success"]["recipes"])
       Object.keys(content).forEach(x=>{
         test.push({
           component: "RecipeCard",
