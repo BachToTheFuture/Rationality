@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
-import { calendarOutline, wifi, wine, warning, walk } from 'ionicons/icons';
+import { ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 import './HelpContainer.css';
 
 const HelpContainer: React.FC = () => {
@@ -15,24 +15,32 @@ const HelpContainer: React.FC = () => {
           </IonCardContent>
         </IonCard>
         <IonCard>
+          <IonCardContent>
+            Help Directory:
+          </IonCardContent>
           <IonItem className="ion-activated">
-            <IonIcon icon={calendarOutline} slot="start" />
+            <IonIcon icon={calendar} slot="start" />
             <IonLabel> Calendar </IonLabel>
           </IonItem>
 
           <IonItem>
-            <IonIcon icon={wine} slot="start" />
-            <IonLabel>Card Link Item 2</IonLabel>
+            <IonIcon icon={newspaper} slot="start" />
+            <IonLabel>Shopping List</IonLabel>
           </IonItem>
 
           <IonItem className="ion-activated">
-            <IonIcon icon={warning} slot="start" />
-            <IonLabel>Card Button Item 1 activated</IonLabel>
+            <IonIcon icon={personCircle} slot="start" />
+            <IonLabel>Profile</IonLabel>
           </IonItem>
 
           <IonItem>
-            <IonIcon icon={walk} slot="start" />
-            <IonLabel>Card Button Item 2</IonLabel>
+            <IonIcon icon={nutrition} slot="start" />
+            <IonLabel>Recipes</IonLabel>
+          </IonItem>
+
+          <IonItem>
+            <IonIcon icon={statsChart} slot="start" />
+            <IonLabel>Dashboard</IonLabel>
           </IonItem>
         </IonCard>
     </div>
