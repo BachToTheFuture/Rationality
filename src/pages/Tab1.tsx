@@ -5,6 +5,10 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
 import Calendar from 'react-calendar';
 
+function handleDayChange(value, event) {
+  console.log('Clicked day: ' +value)
+}
+
 const Tab1: React.FC = () => {
   const [value, onChange] = useState(new Date());
   return (
@@ -20,6 +24,7 @@ const Tab1: React.FC = () => {
           <Calendar
             onChange={onChange}
             value={value}
+            onClickDay={handleDayChange}
             />
         </div>
       </IonContent>

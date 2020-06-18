@@ -3,10 +3,13 @@ import { IonRow, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@io
 import './Tab4.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
+import { Button, Accordion, Card } from 'react-bootstrap';
 
 
 import '../components/RecipeList.css';
 import RecipeCard from '../components/RecipeCard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 var user_data = {}
 var query = "";
@@ -55,6 +58,7 @@ class Tab4 extends React.Component {
           time: content[x].data.info.Time,
           diff: content[x].data.info.Difficulty,
           serv: content[x].data.info.Servings,
+          html: content[x].data.content,
           favorite: (x in user_data["success"]["recipes"]),
         });
       });
@@ -107,7 +111,9 @@ class Tab4 extends React.Component {
               <input placeholder="Search..." className="textbox" type="text" onChange={this.handleQuery}></input>
           </IonRow>
         </form>
-          {data.map(block => <RecipeCard pic={true} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+        <Accordion defaultActiveKey="0">
+          {data.map(block => <RecipeCard pic={true} html={block.html} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+        </Accordion>
         </div>
       </IonContent>
     </IonPage>

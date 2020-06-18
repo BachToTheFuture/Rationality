@@ -4,6 +4,31 @@ import { people, calendarOutline, heart, heartOutline, speedometer,alarm, wine, 
 import './RecipeCard.css';
 import { set, get } from "../storage";
 
+import { Button, Accordion, Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// To safely render the recipe
+import sanitizeHtml from "sanitize-html"
+const defaultOptions = {
+  allowedTags: [ 'b', 'i', 'li', 'h2', 'p', 'div', 'em', 'strong', 'a' ],
+  allowedAttributes: {
+    'a': [ 'href' ]
+  },
+  allowedIframeHostnames: ['www.youtube.com']
+};
+
+const sanitize = (dirty, options) => ({
+  __html: sanitizeHtml(
+    dirty, 
+    { ...defaultOptions, ...options }
+  )
+});
+
+const SanitizeHTML = ({ html }) => (
+  <div dangerouslySetInnerHTML={sanitize(html, defaultOptions)} />
+);
+
+
 interface RecipeCardProps {
     uid: string;
     name: string;
@@ -12,6 +37,7 @@ interface RecipeCardProps {
     serv: string;
     favorite: boolean;
     pic: boolean;
+    html?: string;
 }
 
 function handleAdd(name, uid) {
@@ -25,16 +51,19 @@ function handleAdd(name, uid) {
     })
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({pic, uid, name, time, diff, serv, favorite}) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({pic, uid, name, time, diff, serv, favorite, html}) => {
     var src = "https://source.unsplash.com/900x500/?" + name;
     var classes = favorite ? "liked":"";
     // Add "add to my recipes" feature
     return (
-            <IonCard className={pic?"subcard":"subcard"}>
-                <img alt="" className={pic?"":"hide"} alt-text="image" src={pic?src:""}></img>
-                <IonCardHeader>
-                    <IonCardTitle><b>{name}</b></IonCardTitle>
-                    <span className="vert-align">
+
+        <Card className={pic?"subcard":"subcard"}>
+            <img alt="" className={pic?"":"hide"} alt-text="image" src={pic?src:""}></img>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="link" eventKey={name}>
+                <IonCardTitle><b>{name}</b></IonCardTitle>
+              </Accordion.Toggle>
+              <span className="vert-align">
                         <a onClick={e=>{handleAdd(name, uid)}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
                         <IonLabel className="recipe-label"> {favorite?"In your cookbook":"Add to cookbook"} </IonLabel>
                     </span>
@@ -50,8 +79,13 @@ const RecipeCard: React.FC<RecipeCardProps> = ({pic, uid, name, time, diff, serv
                         <IonIcon icon={people} />
                         <IonLabel className="recipe-label"> Serves {serv} </IonLabel>
                     </span>
-                </IonCardHeader>
-            </IonCard>
+            </Card.Header>
+            <Accordion.Collapse eventKey={name}>
+                <Card.Body>
+                <SanitizeHTML html={html} />
+                </Card.Body>
+            </Accordion.Collapse>
+          </Card>
     );
 };
 
