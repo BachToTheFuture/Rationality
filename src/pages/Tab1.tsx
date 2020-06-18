@@ -15,14 +15,11 @@ const Tab1: React.FC = () => {
           <IonToolbar>
             <IonTitle size="large">Tab 1</IonTitle>
           </IonToolbar>
-          <IonToolbar>
-            
-          </IonToolbar>
         </IonHeader>
-          <div>
-            <Calendar
-              onChange={onChange}
-              value={value}
+        <div>
+          <Calendar
+            onChange={onChange}
+            value={value}
             />
         </div>
       </IonContent>
