@@ -13,6 +13,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 var user_data = {}
 var list = []
 
+var random_greets = [
+  "Hey there,",
+  "Hello,",
+  "Eat healthy,",
+  "Be rational,"
+]
+
 class Tab3 extends React.Component {
   state = {
     loading: 1,
@@ -163,7 +170,7 @@ handleRemove(name, uid, parent) {
     return (
       <IonPage>
         <IonContent>
-          <IonTitle size="large" class="welcome">Hey there,</IonTitle>
+          <IonTitle size="large" class="welcome">{random_greets[Math.floor(Math.random()*3)]}</IonTitle>
           <IonTitle size="large" class="usertitle"><b>{user_data["success"]["name"]}!</b></IonTitle>
           <div>
           <IonCard>

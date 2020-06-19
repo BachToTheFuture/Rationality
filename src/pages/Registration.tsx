@@ -7,9 +7,9 @@ import { ellipse, lockOpen, statsChart, nutrition, newspaper, triangle, calendar
 import { set } from "../storage";
 import "./LoginView.css";
 
-class LoginView extends React.Component {
+class Registration extends React.Component {
     state = {
-      logged_in: false,
+      registered: false,
       showToast: false,
       toastText:""
     }
@@ -21,26 +21,25 @@ class LoginView extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'form': {'username': username, 'password':password}})
+        body: JSON.stringify({'form': {'username': username, 'password':password, 'password2':password2}})
       }).then(response => response.json()).then(content => {
         console.log(content);
         if (content.success) {
-          set("login", content);
           this.setState({
-            logged_in: true
+            registered: true
           });
         }
         else {
           this.setState({
-            toastText: "Incorrect username or password",
+            toastText: content.msg,
             showToast: true
           });
         }
       })
     }
     renderRedirect = () => {
-      if (this.state.logged_in) {
-        return <Redirect to='/main' exact/>
+      if (this.state.registered) {
+        return <Redirect to='/' exact/>
       }
     }
     render () {
@@ -51,7 +50,7 @@ class LoginView extends React.Component {
           {this.renderRedirect()}
           <div className="container">
         <img src="assets/logo.png" height="100"></img>
-        <IonTitle size="large" class="usertitle"><b>Rationality</b></IonTitle>
+        <IonTitle size="large" class="usertitle"><b>Register</b></IonTitle>
         <form onSubmit={this.setRedirect}>
             <IonRow>
                 <input className="textbox" onChange={handleUsername} id="username" type="text" name="username" placeholder="Username"></input>
@@ -59,13 +58,16 @@ class LoginView extends React.Component {
             <IonRow>
             <input className="textbox" onChange={handlePassword} id="password" type="password" name="password" placeholder="Password"></input>
             </IonRow>
+            <IonRow>
+            <input className="textbox" onChange={handlePassword2} id="password2" type="password" name="password2" placeholder="Reenter password"></input>
+            </IonRow>
             <IonButton type="submit" class="center" shape="round">
               <IonIcon slot="start" icon={lockOpen} />
-              Login
+              Register!
             </IonButton>
-            <IonButton href="/register" class="center" shape="round" color="tertiary">
+            <IonButton href="/" class="center" shape="round" color="tertiary">
               <IonIcon slot="start" icon={lockOpen} />
-              Register
+              Go back
             </IonButton>
             
         </form>
@@ -75,7 +77,7 @@ class LoginView extends React.Component {
             isOpen={this.state.showToast}
             onDidDismiss={() => this.setState({showToast:false})}
             message={this.state.toastText}
-            duration={1000}
+            duration={3000}
             color="danger"
           />
           </IonContent>
@@ -86,6 +88,7 @@ class LoginView extends React.Component {
 
 var username = "";
 var password = "";
+var password2 = "";
 
 const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
     username = e.target.value;
@@ -93,21 +96,9 @@ const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     password = e.target.value;
  }
+ const handlePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    password2 = e.target.value;
+ }
 
-async function handleFormSubmit(e: React.ChangeEvent<HTMLInputElement>) {
-  e.preventDefault();
-  const response = await fetch(`https://Rationality--bach5000.repl.co/login`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({'form': {'username': username, 'password':password}})
-    });
-    const content = await response.json();
-    console.log(content);
-    return content;
-};
-
-export default LoginView;
+export default Registration;
   
