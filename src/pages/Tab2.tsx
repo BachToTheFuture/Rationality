@@ -38,8 +38,15 @@ class Tab2 extends React.Component {
   }
 
   removeCheck(e:any, val, i) {
-    let uri = "https://Rationality--bach5000.repl.co/checkoff/"+user_data["success"]["_id"]+"/"+val
-    fetch(uri).then(response => response.json()).then(content => {
+    let uri = "https://Rationality--bach5000.repl.co/checkoff"
+    fetch(uri,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"uid": user_data["success"]["_id"], "item":val})
+    }).then(response => response.json()).then(content => {
         console.log(content);
         if (content.success) {
             user_data = content;

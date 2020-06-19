@@ -64,31 +64,45 @@ class Tab3 extends React.Component {
     })
   }
   handleAdd(name, uid, parent) {
-    let uri = "https://Rationality--bach5000.repl.co/add/"+uid+"/"+name
-    fetch(uri).then(response => response.json()).then(content => {
-      console.log(content);
-      if (content.success) {
-          // Update user data
-          set("login", content);
-          // Update user data
-          user_data = content;
-          console.log("ADDED")
-          // Update state
-          parent.setState({
-            update: name
-          });
-          // Update data
-          list.forEach((x, n)=>{
-            if (x.name === name)
-              list[n]["favorite"] = true;
-          });
-      }
+    let uri = "https://Rationality--bach5000.repl.co/add"
+    fetch(uri,{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"uid": uid, "food":name})
+  }).then(response => response.json()).then(content => {
+        console.log(content);
+        if (content.success) {
+            // Update user data
+            set("login", content);
+            // Update user data
+            user_data = content;
+            console.log("ADDED")
+            // Update state
+            parent.setState({
+              update: name
+            });
+            // Update data
+            list.forEach((x, n)=>{
+              if (x.name === name)
+                list[n]["favorite"] = true;
+            });
+        }
     })
-  }
+}
 
-  handleRemove(name, uid, parent) {
-      let uri = "https://Rationality--bach5000.repl.co/remove/"+uid+"/"+name
-      fetch(uri).then(response => response.json()).then(content => {
+handleRemove(name, uid, parent) {
+    let uri = "https://Rationality--bach5000.repl.co/remove"
+    fetch(uri,{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"uid": uid, "food":name})
+  }).then(response => response.json()).then(content => {
         console.log(content);
         if (content.success) {
             // Update user data
@@ -103,11 +117,11 @@ class Tab3 extends React.Component {
             // Update data
             list.forEach((x, n)=>{
               if (x.name === name)
-                list[n]["favorite"] = false;
+                list.splice(n,1)
             });
         }
-      })
-  }
+    })
+}
 
   logout () {
     // Reset stuff

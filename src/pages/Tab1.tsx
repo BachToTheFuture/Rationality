@@ -32,8 +32,6 @@ function setDate(value) {
 
 function handleDayChange(value, event) {
   setDate(value);
-  // If there is food scheduled for a day...
-  
 }
 
 
@@ -47,11 +45,20 @@ class Tab1 extends React.Component {
   }
 
   handleSchedule(uid, date, name) {
+    console.log(current_day);
+    let old_day = current_day;
     this.setState({
       loading: 1
     });
-    let uri = "https://Rationality--bach5000.repl.co/schedule/"+uid+"/"+date+"/"+name
-    fetch(uri).then(response => response.json()).then(content => {
+    let uri = "https://Rationality--bach5000.repl.co/schedule"
+    fetch(uri,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"uid": uid, "date":date, "food":name})
+    }).then(response => response.json()).then(content => {
       if (content.success) {
             // Update user data
             set("login", content);
@@ -65,6 +72,8 @@ class Tab1 extends React.Component {
             this.setState({
               loading: 0
             });
+            current_day = old_day;
+            console.log(current_day);
         }
     })
     
@@ -95,7 +104,8 @@ class Tab1 extends React.Component {
         });
         list = test;
         this.setState({
-          loading: 0
+          loading: 0,
+          value: new Date()
         });
         setDate(new Date()); // Set date to today.
       }

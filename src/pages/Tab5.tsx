@@ -58,8 +58,14 @@ class Tab5 extends React.Component {
     this.setState({
       loading: 1
     });
-    fetch(`https://Rationality--bach5000.repl.co/invadd/`+user_data["success"]["_id"]+"/"+item)
-    .then(response => response.json()).then(content => {
+    fetch(`https://Rationality--bach5000.repl.co/invadd`,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"uid": user_data["success"]["_id"], "item":item})
+    }).then(response => response.json()).then(content => {
       console.log(content);
       user_data = content;
       list.push(item);
@@ -76,8 +82,14 @@ class Tab5 extends React.Component {
     this.setState({
       loading: 1
     });
-    fetch(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val)
-    .then(response => response.json()).then(content => {
+    fetch(`https://Rationality--bach5000.repl.co/invrmv`,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"uid": user_data["success"]["_id"], "item":val})
+    }).then(response => response.json()).then(content => {
       user_data = content;
       set("login", user_data);
       list.splice(list.indexOf(val), 1);
