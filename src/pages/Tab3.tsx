@@ -168,10 +168,11 @@ handleRemove(name, uid, parent) {
           <div>
           <IonCard>
                 <IonCardHeader>
-                  <IonCardTitle>Your Profile</IonCardTitle>
+                  <IonCardTitle>Welcome</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
-                  Blah some user content/data here...
+                  Instructions: 
+                    - In order to schedule a meal, make sure to double tap the heart in order to add it to favorites.
                   <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
                 </IonCardContent>
               </IonCard>
