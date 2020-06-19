@@ -4,6 +4,7 @@
     padding-bottom: 55.25%;
     position: relative;
     background: transparent;
+    overflow: hidden;
 }
 
 .img-container img {

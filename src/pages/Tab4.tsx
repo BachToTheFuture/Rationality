@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { Button, Accordion, Card } from 'react-bootstrap';
 
 
-import '../components/RecipeList.css';
+import '../components/RecipeList.css';  
 import RecipeCard from '../components/RecipeCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

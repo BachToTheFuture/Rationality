@@ -48,6 +48,8 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
     var classes = favorite ? "liked special-icon":"special-icon";
     // Add "add to my recipes" feature
     var div_classes = pic?"img-container":"img-container hide"
+
+    var stuff_classes = time?"":"hide"
     return (
         // Find a way to refresh
         <Card className={pic?"subcard":"subcard"}>
@@ -72,17 +74,19 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
 
             <Accordion.Collapse eventKey={name}>
                 <Card.Body>
-                <IonIcon className="special-icon" icon={alarm}/>
-                <span className="recipe-label special-text"> {time} </span>
+                    <div className={stuff_classes}>
+                        <IonIcon className="special-icon" icon={alarm}/>
+                        <span className="recipe-label special-text"> {time} </span>
 
-                <IonIcon className="special-icon" icon={speedometer} />
-                <span className="recipe-label special-text"> {diff} </span>
-                <br></br>
-                <IonIcon className="special-icon" icon={people} />
-                <span className="recipe-label special-text"> Serves {serv} </span>
+                        <IonIcon className="special-icon" icon={speedometer} />
+                        <span className="recipe-label special-text"> {diff} </span>
+                        <br></br>
+                        <IonIcon className="special-icon" icon={people} />
+                        <span className="recipe-label special-text"> Serves {serv} </span>
 
-                <hr></hr>
-                <SanitizeHTML html={html} />
+                        <hr></hr>
+                    </div>
+                    <SanitizeHTML html={html} />
                 </Card.Body>
             </Accordion.Collapse>
           </Card>
