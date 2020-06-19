@@ -17,7 +17,7 @@ import Tab2 from './Tab2';
 import Tab3 from './Tab3';
 import Tab4 from './Tab4';
 import Tab5 from './Tab5';
-import { ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
+import { ellipse, statsChart, fileTray , nutrition, receipt, triangle, calendar, personCircle } from 'ionicons/icons';
 import { get } from "../storage";
 
 class MainView extends React.Component {
@@ -39,7 +39,7 @@ class MainView extends React.Component {
               <IonLabel>Calendar</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab2" href="/main/tab2">
-              <IonIcon icon={newspaper} />
+              <IonIcon icon={receipt} />
               <IonLabel>Shopping List</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab3" href="/main/tab3">
@@ -51,7 +51,7 @@ class MainView extends React.Component {
               <IonLabel>Recipes</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab5" href="/main/tab5">
-              <IonIcon icon={statsChart} />
+              <IonIcon icon={fileTray} />
               <IonLabel>Inventory</IonLabel>
             </IonTabButton>
           </IonTabBar>

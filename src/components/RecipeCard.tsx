@@ -1,11 +1,10 @@
 import React, { FC, ChangeEvent, FormEvent, useState } from "react";
 import { IonContent, IonSearchbar, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
-import { people, calendarOutline, heart, heartOutline, speedometer,alarm, wine, warning, walk } from 'ionicons/icons';
+import { eye, people, calendarOutline, heart, heartOutline, speedometer,alarm, wine, warning, walk } from 'ionicons/icons';
 import './RecipeCard.css';
 import { set, get } from "../storage";
 
 import { Button, Accordion, Card } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 // To safely render the recipe
 import sanitizeHtml from "sanitize-html"
@@ -53,16 +52,22 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
         // Find a way to refresh
         <Card className={pic?"subcard":"subcard"}>
             <img alt="" className={pic?"":"hide"} alt-text="image" src={pic?src:""}></img>
-            <Accordion.Toggle as={Button} eventKey={name}>
-            
-                <b className="cardtitle">{name}</b>
+            <div className="card-stuff">
+            <b className="cardtitle">{name}</b>
                 <br></br>
               <span className="vert-align">
-                <a onClick={e=>{favorite?handleRemove(name, uid, parent):handleAdd(name, uid, parent); favorite = favorite?false:true;}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
+                <a onClick={e=>{favorite?handleRemove(name, uid, parent):handleAdd(name, uid, parent)}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
                 <IonLabel className="recipe-label"> {favorite?"In your cookbook":"Add to cookbook"} </IonLabel>
-            </span>
+                </span>
+                <span className="vert-align">
+                <Accordion.Toggle as="span" eventKey={name}>
+                    <IonIcon icon={eye}/>
+                    <IonLabel className="recipe-label"> Toggle recipe </IonLabel>
+                </Accordion.Toggle>
+                </span>
+            </div>
             
-            </Accordion.Toggle>
+
 
             <Accordion.Collapse eventKey={name}>
                 <Card.Body>

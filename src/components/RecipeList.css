@@ -1,7 +1,6 @@
 
 .recipe-label {
     margin-right:10px;
-    font-weight:bold;
 }
 
 .vert-align {
@@ -14,7 +13,7 @@
 }
 
 .liked {
-    color: #ff8a8a;
+    color: #ac3737;
 }
 
 ion-card {

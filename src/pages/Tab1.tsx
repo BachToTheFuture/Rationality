@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { IonButton, IonItem, IonCardTitle, IonCardContent, IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonSpinner } from '@ionic/react';
 import 'react-calendar/dist/Calendar.css';
-import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
 import Calendar from 'react-calendar';
 import { set, get } from "../storage";
@@ -20,6 +19,8 @@ function setDate(value) {
   const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(value)
   current_day = `${ye}-${mo}-${da}`
   nice_date_string = `${mo2} ${da}, ${ye}`
+
+  if (user_data) console.log(user_data);
 
   if (user_data && user_data["success"]["schedule"][current_day]) {
     scheduled_meal = user_data["success"]["schedule"][current_day]
@@ -125,7 +126,7 @@ class Tab1 extends React.Component {
             </IonCardHeader>
             <IonCardContent>
                 <span className={scheduled_meal?"mealname":"hide"}>
-                  You scheduled <b>{scheduled_meal["name"]}</b> on this day.
+                  You scheduled <b>{scheduled_meal}</b> on this day.
                 </span>
                 <hr></hr>
                 <IonItem>

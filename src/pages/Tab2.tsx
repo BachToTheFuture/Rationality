@@ -19,8 +19,28 @@ function checkWeek(input) {
 class Tab2 extends React.Component {
   
   state = {
-    loading: 1
+    loading: 1,
+    update: ""
   }
+
+  removeCheck(e:any, val, i) {
+    let uri = "https://Rationality--bach5000.repl.co/checkoff/"+user_data["success"]["_id"]+"/"+val
+    fetch(uri).then(response => response.json()).then(content => {
+        console.log(content);
+        if (content.success) {
+            user_data = content;
+            set('login', content);
+            console.log(val);
+            console.log(e.detail.checked);
+            // Remove object
+            delete checkboxList[i];
+            this.setState({
+              update: val
+            });
+        }
+    })
+  }
+
   getData () {
     get("login").then(data => {
       user_data = data;
@@ -33,7 +53,15 @@ class Tab2 extends React.Component {
         let test = []
 
         let now = new Date();
+        Object.keys(user_data["success"].shopping_list).forEach(item=>{
+          let date = user_data["success"].shopping_list[item]
+          let t = checkWeek(date);
+          if (t) {
+              test.push({val: item, isChecked: false})
+          }
+        })
 
+        /*
         Object.keys(user_data["success"].schedule).forEach(date => {
           let t = checkWeek(date)
           console.log(t)
@@ -44,6 +72,8 @@ class Tab2 extends React.Component {
             })
           }
         })
+        */
+
         checkboxList = test;
       }
       // This makes it redirect to login.
@@ -59,6 +89,7 @@ class Tab2 extends React.Component {
   render () {
     //const [checked, setChecked] = useState(false);
     // redirect to login.
+    console.log(checkboxList);
     if (this.state.loading === -1) {
       return <Redirect to="/" exact />
     }
@@ -87,7 +118,7 @@ class Tab2 extends React.Component {
               {checkboxList.map(({ val, isChecked }, i) => (
                 <IonItem key={i}>
                   <IonLabel>{val}</IonLabel>
-                  <IonCheckbox slot="end" color="secondary" value={val} checked={isChecked} />
+                  <IonCheckbox slot="end" color="secondary" onIonChange={e => this.removeCheck(e, val, i)} value={val} checked={isChecked} />
                 </IonItem>
               ))}
               </IonList>

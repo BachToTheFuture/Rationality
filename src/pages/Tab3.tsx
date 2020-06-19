@@ -53,28 +53,46 @@ class Tab3 extends React.Component {
   handleAdd(name, uid, parent) {
     let uri = "https://Rationality--bach5000.repl.co/add/"+uid+"/"+name
     fetch(uri).then(response => response.json()).then(content => {
-        console.log(content);
-        if (content.success) {
-            // Update user data
-            set("login", content);
-            parent.setState({
-              update: name
-            });
-        }
+      console.log(content);
+      if (content.success) {
+          // Update user data
+          set("login", content);
+          // Update user data
+          user_data = content;
+          console.log("ADDED")
+          // Update state
+          parent.setState({
+            update: name
+          });
+          // Update data
+          list.forEach((x, n)=>{
+            if (x.name === name)
+              list[n]["favorite"] = true;
+          });
+      }
     })
   }
 
   handleRemove(name, uid, parent) {
       let uri = "https://Rationality--bach5000.repl.co/remove/"+uid+"/"+name
       fetch(uri).then(response => response.json()).then(content => {
-          console.log(content);
-          if (content.success) {
-              // Update user data
-              set("login", content);
-              parent.setState({
-                update: name
-              });
-          }
+        console.log(content);
+        if (content.success) {
+            // Update user data
+            set("login", content);
+            // Update user data
+            user_data = content;
+            console.log("REMOVED")
+            // Update state
+            parent.setState({
+              update: name
+            });
+            // Update data
+            list.forEach((x, n)=>{
+              if (x.name === name)
+                list[n]["favorite"] = false;
+            });
+        }
       })
   }
 

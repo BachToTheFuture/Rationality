@@ -6,6 +6,8 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import MainView from './pages/MainView';
 import LoginView from './pages/LoginView';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
