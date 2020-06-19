@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonButton, IonItem, IonCardTitle, IonCardContent, IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonSpinner } from '@ionic/react';
+import { IonToast, IonButton, IonItem, IonCardTitle, IonCardContent, IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonSpinner } from '@ionic/react';
 import 'react-calendar/dist/Calendar.css';
 import './Tab1.css';
 import Calendar from 'react-calendar';
@@ -42,6 +42,8 @@ class Tab1 extends React.Component {
   state = {
     loading: 1,
     value: new Date(),
+    showToast : false,
+    toastText : ""
   }
 
   handleSchedule(uid, date, name) {
@@ -70,7 +72,9 @@ class Tab1 extends React.Component {
             });
             list = test;
             this.setState({
-              loading: 0
+              loading: 0,
+              showToast: true,
+              toastText: "Scheduled " + name+" for " + old_day
             });
             current_day = old_day;
             console.log(current_day);
@@ -86,6 +90,9 @@ class Tab1 extends React.Component {
   }
 
   onRouteChanged() {
+    this.setState({
+      loading: 1
+    })
     this.getData()
     this.setState({
       loading: 2 + Math.random()
@@ -111,9 +118,10 @@ class Tab1 extends React.Component {
       }
       // This makes it redirect to login.
       else {
-        alert("NOT AUTHENTICATED");
         this.setState({
-          loading: -1
+          loading: -1,
+          toastText: "You are not authorized.",
+          showToast: true
         });
       }
     })
@@ -176,7 +184,14 @@ class Tab1 extends React.Component {
               <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">Schedule</IonButton>
             </IonCardContent>
           </IonCard>
-        </IonContent>
+          <IonToast
+            isOpen={this.state.showToast}
+            onDidDismiss={() => this.setState({showToast:false})}
+            message={this.state.toastText}
+            duration={4000}
+            color="success"
+          />
+          </IonContent>
       </IonPage>
     );
   }

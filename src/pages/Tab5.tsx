@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonRow, IonCard, IonCardHeader, IonCardContent, IonHeader, IonToolbar, IonList, IonItemDivider, IonItem, IonLabel, IonCheckbox, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
+import { IonToast, IonRow, IonCard, IonCardHeader, IonCardContent, IonHeader, IonToolbar, IonList, IonItemDivider, IonItem, IonLabel, IonCheckbox, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
 import './Tab5.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
@@ -14,7 +14,9 @@ class Tab5 extends React.Component {
   
   state = {
     loading: 1,
-    update: ""
+    update: "",
+    toastText:"",
+    showToast: false
   }
 
   componentDidUpdate(prevProps) {
@@ -24,6 +26,9 @@ class Tab5 extends React.Component {
   }
 
   onRouteChanged() {
+    this.setState({
+      loading: 1
+    })
     this.getData()
     this.setState({
       loading: 2 + Math.random()
@@ -33,21 +38,23 @@ class Tab5 extends React.Component {
 
   getData () {
     get("login").then(data => {
-      user_data = data;
       // If user is authenticated
       if (data && data.success) {
         this.setState({
           loading: 0
         });
+        user_data = data;
         // Update shoping list
         list = Object.keys(data["success"]["inventory"])
+        console.log("CHECKING DATA HERE HERE HERE")
         console.log(data)
       }
       // This makes it redirect to login.
       else {
-        alert("NOT AUTHENTICATED");
         this.setState({
-          loading: -1
+          loading: -1,
+          toastText: "You are not authorized.",
+          showToast: true
         });
       }
     })
@@ -72,7 +79,9 @@ class Tab5 extends React.Component {
       console.log(content["success"]["inventory"])
       set("login", user_data);
       this.setState({
-        loading: 0
+        loading: 0,
+        toastText: item + " has been added to your inventory!",
+        showToast: true
       });
       // How to turn this into components?
     })
@@ -97,7 +106,9 @@ class Tab5 extends React.Component {
       console.log(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val);
       console.log(content["success"]["inventory"])
       this.setState({
-        loading: 0
+        loading: 0,
+        toastText: val + " has been removed.",
+        showToast: true
       });
       // How to turn this into components?
     })
@@ -151,6 +162,13 @@ class Tab5 extends React.Component {
               </IonList>
             </IonCardContent>
           </IonCard>
+          <IonToast
+            isOpen={this.state.showToast}
+            onDidDismiss={() => this.setState({showToast:false})}
+            message={this.state.toastText}
+            duration={2000}
+            color="success"
+          />
       </IonContent>
       </IonPage>
     );

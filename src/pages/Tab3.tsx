@@ -3,7 +3,7 @@ import { IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/reac
 import './Tab3.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
+import { IonToast, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
 import { ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 import RecipeCard from '../components/RecipeCard';
 
@@ -16,7 +16,9 @@ var list = []
 class Tab3 extends React.Component {
   state = {
     loading: 1,
-    update: ""
+    update: "",
+    showToast: false,
+    toastText: ""
   }
   componentDidUpdate(prevProps) {
     if (this.props["location"] !== prevProps.location) {
@@ -25,6 +27,9 @@ class Tab3 extends React.Component {
   }
 
   onRouteChanged() {
+    this.setState({
+      loading: 1
+    })
     this.getData()
     this.setState({
       loading: 2 + Math.random()
@@ -51,14 +56,15 @@ class Tab3 extends React.Component {
         });
         list = test;
         this.setState({
-          loading: 0
+          loading: 0,
         });
       }
       // This makes it redirect to login.
       else {
-        alert("NOT AUTHENTICATED");
         this.setState({
-          loading: -1
+          loading: -1,
+          toastText: "You are not authorized.",
+          showToast: true
         });
       }
     })
@@ -79,7 +85,6 @@ class Tab3 extends React.Component {
             set("login", content);
             // Update user data
             user_data = content;
-            console.log("ADDED")
             // Update state
             parent.setState({
               update: name
@@ -88,6 +93,10 @@ class Tab3 extends React.Component {
             list.forEach((x, n)=>{
               if (x.name === name)
                 list[n]["favorite"] = true;
+            });
+            parent.setState({
+              toastText: "Added " + name,
+              showToast: true
             });
         }
     })
@@ -118,6 +127,10 @@ handleRemove(name, uid, parent) {
             list.forEach((x, n)=>{
               if (x.name === name)
                 list.splice(n,1)
+            });
+            parent.setState({
+              toastText: "Removed " + name,
+              showToast: true
             });
         }
     })
@@ -173,6 +186,13 @@ handleRemove(name, uid, parent) {
                 </IonCardContent>
               </IonCard>
           </div>
+          <IonToast
+            isOpen={this.state.showToast}
+            onDidDismiss={() => this.setState({showToast:false})}
+            message={this.state.toastText}
+            duration={2000}
+            color="success"
+          />
         </IonContent>
       </IonPage>
     );

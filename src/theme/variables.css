@@ -395,3 +395,7 @@ h2 {
 .container a {
   text-decoration: none;
 }
+
+ion-toast {
+  font-weight: bold !important;
+}

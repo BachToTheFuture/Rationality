@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-import { IonRow, IonButton, IonIcon, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonItemDivider } from '@ionic/react';
+import { IonToast, IonRow, IonButton, IonIcon, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonItemDivider } from '@ionic/react';
 import { ellipse, lockOpen, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 
 import { set } from "../storage";
@@ -9,7 +9,9 @@ import "./LoginView.css";
 
 class LoginView extends React.Component {
     state = {
-      logged_in: false
+      logged_in: false,
+      showToast: false,
+      toastText:""
     }
     setRedirect = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -29,7 +31,10 @@ class LoginView extends React.Component {
           });
         }
         else {
-          alert("Not verified!")
+          this.setState({
+            toastText: "Incorrect username or password",
+            showToast: true
+          });
         }
       })
     }
@@ -41,6 +46,7 @@ class LoginView extends React.Component {
     render () {
       return (
         <IonPage>
+          <IonContent>
          <div>
           {this.renderRedirect()}
           <div className="container">
@@ -61,6 +67,14 @@ class LoginView extends React.Component {
         </form>
         </div>
          </div>
+         <IonToast
+            isOpen={this.state.showToast}
+            onDidDismiss={() => this.setState({showToast:false})}
+            message={this.state.toastText}
+            duration={1000}
+            color="danger"
+          />
+          </IonContent>
          </IonPage>
       )
     }

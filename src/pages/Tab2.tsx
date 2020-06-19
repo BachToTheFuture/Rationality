@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonCard, IonCardHeader, IonCardContent, IonHeader, IonToolbar, IonList, IonItemDivider, IonItem, IonLabel, IonCheckbox, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
+import { IonToast, IonCard, IonCardHeader, IonCardContent, IonHeader, IonToolbar, IonList, IonItemDivider, IonItem, IonLabel, IonCheckbox, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
 import './Tab2.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
@@ -20,7 +20,9 @@ class Tab2 extends React.Component {
   
   state = {
     loading: 1,
-    update: ""
+    update: "",
+    showToast: false,
+    toastText: "",
   }
 
   
@@ -31,6 +33,9 @@ class Tab2 extends React.Component {
   }
 
   onRouteChanged() {
+    this.setState({
+      loading: 1
+    })
     this.getData()
     this.setState({
       loading: 2 + Math.random()
@@ -56,7 +61,9 @@ class Tab2 extends React.Component {
             // Remove object
             delete checkboxList[i];
             this.setState({
-              update: val
+              update: val,
+              toastText: "Added " + val + " to inventory",
+              showToast: true
             });
         }
     })
@@ -99,9 +106,10 @@ class Tab2 extends React.Component {
       }
       // This makes it redirect to login.
       else {
-        alert("NOT AUTHENTICATED");
         this.setState({
-          loading: -1
+          loading: -1,
+          toastText: "You are not authorized.",
+          showToast: true
         });
       }
     })
@@ -145,6 +153,13 @@ class Tab2 extends React.Component {
               </IonList>
             </IonCardContent>
           </IonCard>
+          <IonToast
+            isOpen={this.state.showToast}
+            onDidDismiss={() => this.setState({showToast:false})}
+            message={this.state.toastText}
+            duration={1000}
+            color="success"
+          />
       </IonContent>
     );
   };

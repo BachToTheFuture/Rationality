@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonRow, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
+import { IonToast, IonRow, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
 import './Tab4.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
@@ -19,7 +19,9 @@ class Tab4 extends React.Component {
   state = {
     loading: 1,
     search: 0,
-    update: ""
+    update: "",
+    toastText: "",
+    showToast: false
   }
 
   componentDidUpdate(prevProps) {
@@ -29,6 +31,9 @@ class Tab4 extends React.Component {
   }
 
   onRouteChanged() {
+    this.setState({
+      loading: 1
+    })
     this.getData()
     this.setState({
       loading: 2 + Math.random()
@@ -48,7 +53,9 @@ class Tab4 extends React.Component {
       // This makes it redirect to login.
       else {
         this.setState({
-          loading: -1
+          loading: -1,
+          toastText: "You are not authorized.",
+          showToast: true
         });
       }
     })
@@ -70,7 +77,6 @@ class Tab4 extends React.Component {
               set("login", content);
               // Update user data
               user_data = content;
-              console.log("ADDED")
               // Update state
               parent.setState({
                 update: name
@@ -79,6 +85,10 @@ class Tab4 extends React.Component {
               data.forEach((x, n)=>{
                 if (x.name === name)
                   data[n]["favorite"] = true;
+              });
+              parent.setState({
+                toastText: "Added " + name + " to favorites",
+                showToast: true
               });
           }
       })
@@ -100,7 +110,6 @@ class Tab4 extends React.Component {
               set("login", content);
               // Update user data
               user_data = content;
-              console.log("REMOVED")
               // Update state
               parent.setState({
                 update: name
@@ -109,6 +118,10 @@ class Tab4 extends React.Component {
               data.forEach((x, n)=>{
                 if (x.name === name)
                   data[n]["favorite"] = false;
+              });
+              parent.setState({
+                toastText: "Removed " + name,
+                showToast: true
               });
           }
       })
@@ -190,6 +203,13 @@ class Tab4 extends React.Component {
           {data.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} pic={true} html={block.html} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
         </Accordion>
         </div>
+        <IonToast
+            isOpen={this.state.showToast}
+            onDidDismiss={() => this.setState({showToast:false})}
+            message={this.state.toastText}
+            duration={2000}
+            color="success"
+          />
       </IonContent>
     </IonPage>
     );
