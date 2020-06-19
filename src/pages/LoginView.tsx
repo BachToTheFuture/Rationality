@@ -40,6 +40,7 @@ class LoginView extends React.Component {
     }
     render () {
       return (
+        <IonPage>
          <div>
           {this.renderRedirect()}
           <div className="container">
@@ -58,8 +59,9 @@ class LoginView extends React.Component {
             </IonButton>
             
         </form>
-    </div>
+        </div>
          </div>
+         </IonPage>
       )
     }
 }

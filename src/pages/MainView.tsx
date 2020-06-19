@@ -18,11 +18,36 @@ import Tab3 from './Tab3';
 import Tab4 from './Tab4';
 import Tab5 from './Tab5';
 import { ellipse, statsChart, fileTray , nutrition, receipt, triangle, calendar, personCircle } from 'ionicons/icons';
-import { get } from "../storage";
+import { set, get } from "../storage";
+
+var user_data;
 
 class MainView extends React.Component {
+
+  state = {
+    update: 0
+  }
+
+  set_login(login) {
+    set("login", login);
+    user_data = login;
+    this.setState({
+      update: this.state.update+1
+    });
+  }
+  get_login() {
+    get("login").then(content => {
+      user_data = content
+      this.setState({
+        update: this.state.update-1
+      });
+    })
+    return user_data
+  }
+
   render () {
       return (
+        <IonPage>
         <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
@@ -57,6 +82,7 @@ class MainView extends React.Component {
           </IonTabBar>
         </IonTabs>
       </IonReactRouter>
+      </IonPage>
       )
     }
   }

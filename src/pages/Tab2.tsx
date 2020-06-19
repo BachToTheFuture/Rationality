@@ -23,6 +23,20 @@ class Tab2 extends React.Component {
     update: ""
   }
 
+  
+  componentDidUpdate(prevProps) {
+    if (this.props["location"] !== prevProps.location) {
+      this.onRouteChanged();
+    }
+  }
+
+  onRouteChanged() {
+    this.getData()
+    this.setState({
+      loading: 2 + Math.random()
+    })
+  }
+
   removeCheck(e:any, val, i) {
     let uri = "https://Rationality--bach5000.repl.co/checkoff/"+user_data["success"]["_id"]+"/"+val
     fetch(uri).then(response => response.json()).then(content => {

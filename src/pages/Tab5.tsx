@@ -17,6 +17,20 @@ class Tab5 extends React.Component {
     update: ""
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props["location"] !== prevProps.location) {
+      this.onRouteChanged();
+    }
+  }
+
+  onRouteChanged() {
+    this.getData()
+    this.setState({
+      loading: 2 + Math.random()
+    })
+  }
+
+
   getData () {
     get("login").then(data => {
       user_data = data;
