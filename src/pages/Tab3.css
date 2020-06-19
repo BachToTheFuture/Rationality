@@ -4,3 +4,16 @@
     margin-right: auto;
     display: block;
 }
+
+.swiper-pagination-bullets {
+    bottom:0px !important;
+ } 
+
+ion-slides {
+    min-height:120px;
+}
+
+.welcome-vert-center {
+    padding-top:10%;
+    padding-bottom:auto;
+}

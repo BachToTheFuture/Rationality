@@ -45,7 +45,7 @@ interface RecipeCardProps {
 
 const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove, pic, uid, name, time, diff, serv, favorite, html}) => {
     var src = "https://source.unsplash.com/900x500/?" + name;
-    var classes = favorite ? "liked":"";
+    var classes = favorite ? "liked special-icon":"special-icon";
     // Add "add to my recipes" feature
 
     return (
@@ -55,34 +55,29 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
             <div className="card-stuff">
             <b className="cardtitle">{name}</b>
                 <br></br>
-              <span className="vert-align">
+
                 <a onClick={e=>{favorite?handleRemove(name, uid, parent):handleAdd(name, uid, parent)}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
-                <IonLabel className="recipe-label"> {favorite?"In your favorites":"Add to favorites"} </IonLabel>
-                </span>
-                <span className="vert-align">
+                <span className="recipe-label special-text"> {favorite?"In your favorites":"Add to favorites"} </span>
+
                 <Accordion.Toggle as="span" eventKey={name}>
-                    <IonIcon icon={eye}/>
-                    <IonLabel className="recipe-label"> Toggle recipe </IonLabel>
+                    <IonIcon className="special-icon" icon={eye}/>
+                    <span className="recipe-label special-text"> Toggle recipe </span>
                 </Accordion.Toggle>
-                </span>
             </div>
             
 
 
             <Accordion.Collapse eventKey={name}>
                 <Card.Body>
-                <span className="vert-align">
-                <IonIcon icon={alarm}/>
-                <IonLabel className="recipe-label"> {time} </IonLabel>
-                </span>
-                <span className="vert-align">
-                    <IonIcon icon={speedometer} />
-                    <IonLabel className="recipe-label"> {diff} </IonLabel>
-                </span>
-                <span className="vert-align">
-                    <IonIcon icon={people} />
-                    <IonLabel className="recipe-label"> Serves {serv} </IonLabel>
-                </span>
+                <IonIcon className="special-icon" icon={alarm}/>
+                <span className="recipe-label special-text"> {time} </span>
+
+                <IonIcon className="special-icon" icon={speedometer} />
+                <span className="recipe-label special-text"> {diff} </span>
+
+                <IonIcon className="special-icon" icon={people} />
+                <span className="recipe-label special-text"> Serves {serv} </span>
+
                 <hr></hr>
                 <SanitizeHTML html={html} />
                 </Card.Body>

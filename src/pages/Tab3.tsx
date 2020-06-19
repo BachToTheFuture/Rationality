@@ -3,12 +3,18 @@ import { IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/reac
 import './Tab3.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
-import { IonToast, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
-import { ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
+import { IonSlide, IonSlides, IonToast, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
+import { helpCircle, ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 import RecipeCard from '../components/RecipeCard';
 
 import { Button, Accordion, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+const slideOpts = {
+  initialSlide: 0,
+  speed: 400
+};
+
 
 var user_data = {}
 var list = []
@@ -175,13 +181,28 @@ handleRemove(name, uid, parent) {
           <div>
           <IonCard>
                 <IonCardHeader>
-                  <IonCardTitle>Welcome</IonCardTitle>
+                  <IonCardTitle>Welcome!</IonCardTitle>
                 </IonCardHeader>
-                <IonCardContent>
-                  Instructions: 
-                    - In order to schedule a meal, make sure to double tap the heart in order to add it to favorites.
-                  <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
+                <IonCardContent class="welcomeslides">
+                  <IonSlides pager={true} options={slideOpts}>
+                    <IonSlide>
+                      <div className="welcome-vert-center">
+                        <IonIcon className="special-icon help-icon" icon={helpCircle} />
+                        <span className="special-text">Swipe to see some helpful hints!</span>
+                      </div>
+                      
+                    </IonSlide>
+                    <IonSlide>
+                        In order to schedule a meal, make sure to double tap the heart in order to add it to favorites.
+                    </IonSlide>
+                    <IonSlide>
+                      <h1>Slide 3</h1>
+                    </IonSlide>
+                  </IonSlides>
                 </IonCardContent>
+                <IonCardHeader>
+                <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
+                </IonCardHeader>
               </IonCard>
             <IonCard>
                 <IonCardHeader>

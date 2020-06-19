@@ -248,6 +248,7 @@ html * {
   padding-top:0;
   font-size: 50px;
   font-weight:500;
+  padding-bottom:10px;
   font-family: 'Montserrat', sans-serif;
   background: -webkit-linear-gradient(0deg,#b67eff,#ff8a8a);
   -webkit-background-clip: text;
@@ -416,3 +417,31 @@ ion-toast {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.swiper-pagination-bullet {
+  background: white !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ff8a8a !important;
+}
+
+ion-card-title {
+  font-weight:bold !important;
+}
+
+.special-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right:5px;
+ }
+ 
+.help-icon {
+  font-size:25px;
+  color: #c496ff;
+}
+
+ .special-text{
+   display: inline-block;
+   vertical-align: middle;
+ }
