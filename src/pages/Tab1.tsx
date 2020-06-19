@@ -125,7 +125,7 @@ class Tab1 extends React.Component {
             </IonCardHeader>
             <IonCardContent>
                 <span className={scheduled_meal?"mealname":"hide"}>
-                  You scheduled <b>{scheduled_meal["name"]}</b> for today.
+                  You scheduled <b>{scheduled_meal["name"]}</b> on this day.
                 </span>
                 <hr></hr>
                 <IonItem>

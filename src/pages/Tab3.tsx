@@ -16,6 +16,7 @@ var list = []
 class Tab3 extends React.Component {
   state = {
     loading: 1,
+    update: ""
   }
   getData () {
     get("login").then(data => {
@@ -48,6 +49,33 @@ class Tab3 extends React.Component {
         });
       }
     })
+  }
+  handleAdd(name, uid, parent) {
+    let uri = "https://Rationality--bach5000.repl.co/add/"+uid+"/"+name
+    fetch(uri).then(response => response.json()).then(content => {
+        console.log(content);
+        if (content.success) {
+            // Update user data
+            set("login", content);
+            parent.setState({
+              update: name
+            });
+        }
+    })
+  }
+
+  handleRemove(name, uid, parent) {
+      let uri = "https://Rationality--bach5000.repl.co/remove/"+uid+"/"+name
+      fetch(uri).then(response => response.json()).then(content => {
+          console.log(content);
+          if (content.success) {
+              // Update user data
+              set("login", content);
+              parent.setState({
+                update: name
+              });
+          }
+      })
   }
 
   logout () {
@@ -95,7 +123,7 @@ class Tab3 extends React.Component {
                 </IonCardHeader>
                 <IonCardContent>
                 <Accordion defaultActiveKey="0">
-                {list.map(block => <RecipeCard html={block.html} pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+                {list.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} html={block.html} pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
                 </Accordion>
                 </IonCardContent>
               </IonCard>

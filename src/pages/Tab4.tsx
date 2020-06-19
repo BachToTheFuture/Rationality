@@ -18,7 +18,8 @@ var data = [];
 class Tab4 extends React.Component {
   state = {
     loading: 1,
-    search: 0
+    search: 0,
+    update: ""
   }
   getData () {
     get("login").then(data => {
@@ -36,6 +37,52 @@ class Tab4 extends React.Component {
         });
       }
     })
+  }
+
+  handleAdd(name, uid, parent) {
+      let uri = "https://Rationality--bach5000.repl.co/add/"+uid+"/"+name
+      fetch(uri).then(response => response.json()).then(content => {
+          console.log(content);
+          if (content.success) {
+              // Update user data
+              set("login", content);
+              // Update user data
+              user_data = content;
+              console.log("ADDED")
+              // Update state
+              parent.setState({
+                update: name
+              });
+              // Update data
+              data.forEach((x, n)=>{
+                if (x.name === name)
+                  data[n]["favorite"] = true;
+              });
+          }
+      })
+  }
+
+  handleRemove(name, uid, parent) {
+      let uri = "https://Rationality--bach5000.repl.co/remove/"+uid+"/"+name
+      fetch(uri).then(response => response.json()).then(content => {
+          console.log(content);
+          if (content.success) {
+              // Update user data
+              set("login", content);
+              // Update user data
+              user_data = content;
+              console.log("REMOVED")
+              // Update state
+              parent.setState({
+                update: name
+              });
+              // Update data
+              data.forEach((x, n)=>{
+                if (x.name === name)
+                  data[n]["favorite"] = false;
+              });
+          }
+      })
   }
 
   handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +117,7 @@ class Tab4 extends React.Component {
 
   render () {
     // redirect to login.
+    console.log(user_data);
     if (this.state.loading === -1) {
       return <Redirect to="/" exact />
     }
@@ -110,7 +158,7 @@ class Tab4 extends React.Component {
           </IonRow>
         </form>
         <Accordion defaultActiveKey="0">
-          {data.map(block => <RecipeCard pic={true} html={block.html} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+          {data.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} pic={true} html={block.html} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
         </Accordion>
         </div>
       </IonContent>
