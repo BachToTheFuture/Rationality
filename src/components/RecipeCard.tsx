@@ -57,7 +57,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
                 <br></br>
               <span className="vert-align">
                 <a onClick={e=>{favorite?handleRemove(name, uid, parent):handleAdd(name, uid, parent)}}><IonIcon className={classes} icon={favorite?heart:heartOutline}/></a>
-                <IonLabel className="recipe-label"> {favorite?"In your cookbook":"Add to cookbook"} </IonLabel>
+                <IonLabel className="recipe-label"> {favorite?"In your favorites":"Add to favorites"} </IonLabel>
                 </span>
                 <span className="vert-align">
                 <Accordion.Toggle as="span" eventKey={name}>

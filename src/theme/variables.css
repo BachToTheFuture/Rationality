@@ -399,3 +399,20 @@ h2 {
 ion-toast {
   font-weight: bold !important;
 }
+
+.query-text {
+  font-style: italic;
+  padding: 5px;
+  font-size:14px;
+  width: 90%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: -20px;
+  padding-top:18px;
+  padding-left:15px;
+  margin-bottom:10px;
+  padding-bottom:10px;
+  background: rgb(43, 42, 42);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

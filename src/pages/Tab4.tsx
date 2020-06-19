@@ -21,7 +21,8 @@ class Tab4 extends React.Component {
     search: 0,
     update: "",
     toastText: "",
-    showToast: false
+    showToast: false,
+    queryText: "Showing featured recipes"
   }
 
   componentDidUpdate(prevProps) {
@@ -40,6 +41,26 @@ class Tab4 extends React.Component {
     })
   }
 
+  getDataInit () {
+    get("login").then(data => {
+      user_data = data;
+      // If user is authenticated
+      if (data && data.success) {
+        this.featured();
+        this.setState({
+          loading: 0
+        });
+      }
+      // This makes it redirect to login.
+      else {
+        this.setState({
+          loading: -1,
+          toastText: "You are not authorized.",
+          showToast: true
+        });
+      }
+    })
+  }
 
   getData () {
     get("login").then(data => {
@@ -130,8 +151,34 @@ class Tab4 extends React.Component {
   handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     query = e.target.value;
   }
-  search = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+
+  featured = () => {
+    this.setState({
+      search: 1
+    });
+    fetch(`https://Rationality--bach5000.repl.co/featured`)
+    .then(response => response.json()).then(content => {
+      let test = [];
+      Object.keys(content).forEach(x=>{
+        test.push({
+          component: "RecipeCard",
+          name: x,
+          time: content[x].info.Time,
+          diff: content[x].info.Difficulty,
+          serv: content[x].info.Servings,
+          html: content[x].content,
+          favorite: (x in user_data["success"]["recipes"]),
+        });
+      });
+      data = test;
+      this.setState({
+        search: 0
+      });
+      // How to turn this into components?
+    })
+  }
+
+  actualSearch = () => {
     this.setState({
       search: 1
     });
@@ -151,10 +198,16 @@ class Tab4 extends React.Component {
       });
       data = test;
       this.setState({
-        search: 0
+        search: 0,
+        queryText: `Search results for \"${query}\"`
       });
       // How to turn this into components?
     })
+  }
+
+  search = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    this.actualSearch();
   }
 
   render () {
@@ -166,7 +219,7 @@ class Tab4 extends React.Component {
     if (this.state.loading === 1) {
       return (
         <IonPage>
-          {this.getData()}
+          {this.getDataInit()}
         <IonContent>
           <div className="container">
             <IonSpinner className="big-spinner" name="crescent" />
@@ -199,6 +252,9 @@ class Tab4 extends React.Component {
               <input placeholder="Search..." className="textbox" type="text" onChange={this.handleQuery}></input>
           </IonRow>
         </form>
+        <div className="query-text">
+          {this.state.queryText}
+        </div>
         <Accordion defaultActiveKey="0">
           {data.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} pic={true} html={block.html} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
         </Accordion>
