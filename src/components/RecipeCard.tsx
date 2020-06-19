@@ -1,5 +1,5 @@
 import React, { FC, ChangeEvent, FormEvent, useState } from "react";
-import { IonContent, IonSearchbar, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
+import { IonContent, IonSearchbar, IonThumbnail, IonImg, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import { eye, people, calendarOutline, heart, heartOutline, speedometer,alarm, wine, warning, walk } from 'ionicons/icons';
 import './RecipeCard.css';
 import { set, get } from "../storage";
@@ -51,7 +51,10 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
     return (
         // Find a way to refresh
         <Card className={pic?"subcard":"subcard"}>
-            <img alt="" className={pic?"":"hide"} alt-text="image" src={pic?src:""}></img>
+            <div className="img-container">
+                <img className={pic?"":"hide"} src={pic?src:""} />
+            </div>
+                
             <div className="card-stuff">
             <b className="cardtitle">{name}</b>
                 <br></br>

@@ -188,15 +188,18 @@ handleRemove(name, uid, parent) {
                     <IonSlide>
                       <div className="welcome-vert-center">
                         <IonIcon className="special-icon help-icon" icon={helpCircle} />
-                        <span className="special-text">Swipe to see some helpful hints!</span>
+                        <span className="special-text">Swipe to see some <b>helpful hints</b>!</span>
                       </div>
                       
                     </IonSlide>
                     <IonSlide>
-                        In order to schedule a meal, make sure to double tap the heart in order to add it to favorites.
+                        You can only schedule meals from your favorites! <b>Double tap the heart on the meal card</b> to add it.
                     </IonSlide>
                     <IonSlide>
-                      <h1>Slide 3</h1>
+                       Add items that you already have in your inventory!
+                    </IonSlide>
+                    <IonSlide>
+                       Items in your shopping list are added automatically when you schedule meals.
                     </IonSlide>
                   </IonSlides>
                 </IonCardContent>
