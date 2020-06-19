@@ -47,12 +47,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
     var src = "https://source.unsplash.com/900x500/?" + name;
     var classes = favorite ? "liked special-icon":"special-icon";
     // Add "add to my recipes" feature
-
+    var div_classes = pic?"img-container":"img-container hide"
     return (
         // Find a way to refresh
         <Card className={pic?"subcard":"subcard"}>
-            <div className="img-container">
-                <img className={pic?"":"hide"} src={pic?src:""} />
+            <div className={div_classes}>
+                <img src={pic?src:""} />
             </div>
                 
             <div className="card-stuff">
@@ -77,7 +77,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
 
                 <IonIcon className="special-icon" icon={speedometer} />
                 <span className="recipe-label special-text"> {diff} </span>
-
+                <br></br>
                 <IonIcon className="special-icon" icon={people} />
                 <span className="recipe-label special-text"> Serves {serv} </span>
 
