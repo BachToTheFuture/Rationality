@@ -34,7 +34,7 @@ class Tab2 extends React.Component {
 
   onRouteChanged() {
     this.setState({
-      loading: 1
+      loading: 1,
     })
     this.getData()
     this.setState({
