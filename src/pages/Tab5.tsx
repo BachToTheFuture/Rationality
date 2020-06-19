@@ -71,6 +71,26 @@ class Tab5 extends React.Component {
       // How to turn this into components?
     })
   }
+
+  removeitem = (val) => {
+    this.setState({
+      loading: 1
+    });
+    fetch(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val)
+    .then(response => response.json()).then(content => {
+      user_data = content;
+      set("login", user_data);
+      list.splice(list.indexOf(val), 1);
+      console.log("NEW INV")
+      console.log(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val);
+      console.log(content["success"]["inventory"])
+      this.setState({
+        loading: 0
+      });
+      // How to turn this into components?
+    })
+  }
+
   handleChange (e:any) {
       item = e.target.value;
   }
@@ -113,6 +133,7 @@ class Tab5 extends React.Component {
               {list.map((val , i) => (
                 <IonItem key={i}>
                   <IonLabel>{val}</IonLabel>
+                  <a onClick={(e)=>this.removeitem(val)}>{"×"}</a>
                 </IonItem>
               ))}
               </IonList>

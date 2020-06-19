@@ -30,18 +30,6 @@ function setDate(value) {
   }
 }
 
-function handleSchedule(uid, date, name) {
-  let uri = "https://Rationality--bach5000.repl.co/schedule/"+uid+"/"+date+"/"+name
-  fetch(uri).then(response => response.json()).then(content => {
-    if (content.success) {
-          // Update user data
-          console.log(content);
-          set("login", content);
-      }
-  })
-  
-}
-
 function handleDayChange(value, event) {
   setDate(value);
   // If there is food scheduled for a day...
@@ -56,6 +44,30 @@ class Tab1 extends React.Component {
   state = {
     loading: 1,
     value: new Date(),
+  }
+
+  handleSchedule(uid, date, name) {
+    this.setState({
+      loading: 1
+    });
+    let uri = "https://Rationality--bach5000.repl.co/schedule/"+uid+"/"+date+"/"+name
+    fetch(uri).then(response => response.json()).then(content => {
+      if (content.success) {
+            // Update user data
+            set("login", content);
+            user_data = content;
+            content = content["success"]["recipes"];
+            let test = [];
+            Object.keys(content).forEach(x=>{
+              test.push(x);
+            });
+            list = test;
+            this.setState({
+              loading: 0
+            });
+        }
+    })
+    
   }
 
   componentDidUpdate(prevProps) {
@@ -151,7 +163,7 @@ class Tab1 extends React.Component {
                     ))}
                   </IonSelect>
               </IonItem>
-              <IonButton onClick={(e)=>handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">Schedule</IonButton>
+              <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">Schedule</IonButton>
             </IonCardContent>
           </IonCard>
         </IonContent>
