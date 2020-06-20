@@ -5,12 +5,13 @@ import './RecipeCard.css';
 import { set, get } from "../storage";
 
 import { Button, Accordion, Card } from 'react-bootstrap';
+import ImageFadeIn from "react-image-fade-in";
 
 // To safely render the recipe
 import sanitizeHtml from "sanitize-html"
 import { Redirect } from 'react-router-dom';
 const defaultOptions = {
-  allowedTags: [ 'b', 'i', 'li', 'h2', 'p', 'div', 'em', 'strong', 'a' ],
+  allowedTags: [ 'b', 'i', 'li', 'h2', 'h1', 'h3', 'h4', 'h5', 'p', 'div', 'em', 'strong', 'a' ],
   allowedAttributes: {
     'a': [ 'href' ]
   },
@@ -53,9 +54,8 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
     return (
         // Find a way to refresh
         <Card className={pic?"subcard":"subcard"}>
-            <div className={div_classes}>
-                <img src={pic?src:""} />
-            </div>
+          <ImageFadeIn src={pic?src:""} height={250} />
+            
                 
             <div className="card-stuff">
             <b className="cardtitle">{name}</b>
@@ -70,14 +70,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
                 </Accordion.Toggle>
             </div>
             
-
-
             <Accordion.Collapse eventKey={name}>
                 <Card.Body>
                     <div className={stuff_classes}>
                         <IonIcon className="special-icon" icon={alarm}/>
                         <span className="recipe-label special-text"> {time} </span>
-
+                        <br></br>
                         <IonIcon className="special-icon" icon={speedometer} />
                         <span className="recipe-label special-text"> {diff} </span>
                         <br></br>

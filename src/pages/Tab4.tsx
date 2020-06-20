@@ -95,9 +95,6 @@ class Tab4 extends React.Component {
               // Update user data
               user_data = content;
               // Update state
-              parent.setState({
-                update: name
-              });
               // Update data
               data.forEach((x, n)=>{
                 if (x.name === name)
@@ -213,16 +210,7 @@ class Tab4 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getDataInit()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getDataInit()
     }
     if (this.state.search === 1) {
       return (
@@ -230,6 +218,12 @@ class Tab4 extends React.Component {
         <IonContent>
         <h1 className="welcome"><b>Recipes</b></h1>
           <br></br>
+          <IonRow>
+              <input placeholder={query} className="textbox" type="text"></input>
+          </IonRow>
+          <div className="query-text">
+            Getting recipes...
+          </div>
           <div className="container">
             <IonSpinner className="big-spinner" name="crescent" />
           </div>

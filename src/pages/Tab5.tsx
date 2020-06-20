@@ -76,7 +76,6 @@ class Tab5 extends React.Component {
       list.push(item);
       console.log(content["success"]["inventory"])
       set("login", user_data);
-      list = Object.keys(user_data["success"]["inventory"])
       this.setState({
         loading: 0,
         toastText: item + " has been added to your inventory!",
@@ -101,8 +100,6 @@ class Tab5 extends React.Component {
       user_data = content;
       set("login", user_data);
       list.splice(list.indexOf(val), 1);
-      list = Object.keys(user_data["success"]["inventory"])
-      console.log("NEW INV")
       console.log(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val);
       console.log(content["success"]["inventory"])
       this.setState({
@@ -126,16 +123,7 @@ class Tab5 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getData()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getData()
     }
     return (
       <IonPage>
@@ -156,7 +144,7 @@ class Tab5 extends React.Component {
               {list.map((val , i) => (
                 <IonItem key={i}>
                   <IonLabel>{val}</IonLabel>
-                  <a onClick={(e)=>this.removeitem(val)}>{"×"}</a>
+                  <a style={{fontSize:"30px", fontWeight:"bold"}} onClick={(e)=>this.removeitem(val)}>{"×"}</a>
                 </IonItem>
               ))}
               </IonList>

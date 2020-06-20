@@ -450,6 +450,7 @@ ion-card-title {
   display: inline-block;
   vertical-align: middle;
   margin-right:5px;
+  font-size:30px;
  }
  
 .help-icon {
@@ -498,4 +499,8 @@ ion-button {
 
 ion-content {
   --background: url(/assets/lowpoly.png) no-repeat center/cover fixed;
+}
+
+.popover-viewport {
+  padding:20px;
 }

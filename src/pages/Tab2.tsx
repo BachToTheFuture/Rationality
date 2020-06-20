@@ -57,16 +57,7 @@ class Tab2 extends React.Component {
             console.log(e.detail.checked);
             // Remove object
             delete checkboxList[i];
-            let test = []
-            console.log(user_data["success"].shopping_list);
-            Object.keys(user_data["success"].shopping_list).forEach(item=>{
-              let date = user_data["success"].shopping_list[item]
-              let t = checkWeek(date);
-              console.log("CHECK IF SAME WEEK" + t)
-              if (t) {
-                  test.push({val: item, isChecked: false})
-              }
-            })
+            
             this.setState({
               update: val,
               toastText: "Added " + val + " to inventory",
@@ -130,19 +121,11 @@ class Tab2 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getData()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getData()
     }
     return (
       <IonPage>
+
       <IonContent>
         <h1 className="welcome"><b>Shopping List</b></h1>
           <br></br>

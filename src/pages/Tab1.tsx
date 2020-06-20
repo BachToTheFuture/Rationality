@@ -131,16 +131,7 @@ class Tab1 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getData()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getData()
     }
     return (
       <IonPage>
@@ -174,7 +165,10 @@ class Tab1 extends React.Component {
                     ))}
                   </IonSelect>
               </IonItem>
-              <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">Schedule</IonButton>
+              <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">
+                
+                Schedule
+              </IonButton>
             </Card.Body>
           </IonCard>
           <IonToast
