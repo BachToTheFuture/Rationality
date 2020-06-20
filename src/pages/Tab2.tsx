@@ -35,11 +35,7 @@ class Tab2 extends React.Component {
 
   onRouteChanged() {
     this.setState({
-      loading: 1,
-    })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
+      loading: 1
     })
   }
 
@@ -61,6 +57,16 @@ class Tab2 extends React.Component {
             console.log(e.detail.checked);
             // Remove object
             delete checkboxList[i];
+            let test = []
+            console.log(user_data["success"].shopping_list);
+            Object.keys(user_data["success"].shopping_list).forEach(item=>{
+              let date = user_data["success"].shopping_list[item]
+              let t = checkWeek(date);
+              console.log("CHECK IF SAME WEEK" + t)
+              if (t) {
+                  test.push({val: item, isChecked: false})
+              }
+            })
             this.setState({
               update: val,
               toastText: "Added " + val + " to inventory",
@@ -80,11 +86,11 @@ class Tab2 extends React.Component {
         });
         // Update shoping list
         let test = []
-
-        let now = new Date();
+        console.log(user_data["success"].shopping_list);
         Object.keys(user_data["success"].shopping_list).forEach(item=>{
           let date = user_data["success"].shopping_list[item]
           let t = checkWeek(date);
+          console.log("CHECK IF SAME WEEK" + t)
           if (t) {
               test.push({val: item, isChecked: false})
           }
@@ -102,7 +108,7 @@ class Tab2 extends React.Component {
           }
         })
         */
-
+        console.log(test);
         checkboxList = test;
       }
       // This makes it redirect to login.
@@ -144,7 +150,7 @@ class Tab2 extends React.Component {
               Showing list for <b>this week, {start_week}-{end_week}</b>
             </Card.Header>
             <Card.Body>
-              <IonList className={checkboxList.length?"":"hide"}>
+              <IonList>
               {checkboxList.map(({ val, isChecked }, i) => (
                 <IonItem key={i}>
                   <IonLabel>{val}</IonLabel>

@@ -27,12 +27,9 @@ class Tab5 extends React.Component {
   }
 
   onRouteChanged() {
+    console.log("JUST OPENED TAB5")
     this.setState({
       loading: 1
-    })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
     })
   }
 
@@ -79,6 +76,7 @@ class Tab5 extends React.Component {
       list.push(item);
       console.log(content["success"]["inventory"])
       set("login", user_data);
+      list = Object.keys(user_data["success"]["inventory"])
       this.setState({
         loading: 0,
         toastText: item + " has been added to your inventory!",
@@ -103,6 +101,7 @@ class Tab5 extends React.Component {
       user_data = content;
       set("login", user_data);
       list.splice(list.indexOf(val), 1);
+      list = Object.keys(user_data["success"]["inventory"])
       console.log("NEW INV")
       console.log(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val);
       console.log(content["success"]["inventory"])

@@ -43,10 +43,6 @@ class Tab3 extends React.Component {
     this.setState({
       loading: 1
     })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
-    })
   }
 
   getData () {
@@ -181,24 +177,22 @@ handleRemove(name, uid, parent) {
             <div>
               <Accordion defaultActiveKey="0">
                 
-                <IonCard>
+                <IonCard className="quickactions-card">
                   
 
                 <Card.Body>
                   <b className="quickactions">Quick actions</b>
-                <IonRow>
-                    <Accordion.Toggle as="div" eventKey="help">
-                      <IonButton>
-                        <IonIcon className="special-icon" icon={helpCircle}/>
-                        <span className="recipe-label special-text"> Help </span>
-                      </IonButton>
-
-                    </Accordion.Toggle>
-                   
                   
-                    <IonButton color="tertiary" onClick={this.logout} href="/" >Sign Out</IonButton>
-                    
-                  </IonRow>
+                  
+                  <IonRow>
+                      <Accordion.Toggle as="div" eventKey="help">
+                        <IonButton>
+                          <IonIcon className="special-icon" icon={helpCircle}/>
+                          <span className="recipe-label special-text"> Help </span>
+                        </IonButton>
+                      </Accordion.Toggle>
+                      <IonButton color="tertiary" onClick={this.logout} href="/" >Sign Out</IonButton>
+                    </IonRow>
                 
                 <Accordion.Collapse eventKey="help">
                 <IonSlides pager={true} options={slideOpts}>
@@ -210,7 +204,7 @@ handleRemove(name, uid, parent) {
                       
                     </IonSlide>
                     <IonSlide>
-                        You can only schedule meals from your favorites! Double tap the heart on the meal card to add it.
+                        You can only schedule meals from your favorites! Tap the heart on the meal card to add it.
                     </IonSlide>
                     <IonSlide>
                        Add items that you already have in your inventory!

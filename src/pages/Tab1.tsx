@@ -93,10 +93,6 @@ class Tab1 extends React.Component {
     this.setState({
       loading: 1
     })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
-    })
   }
 
   getData () {
