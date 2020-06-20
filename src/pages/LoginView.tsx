@@ -95,20 +95,5 @@ const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
     password = e.target.value;
  }
 
-async function handleFormSubmit(e: React.ChangeEvent<HTMLInputElement>) {
-  e.preventDefault();
-  const response = await fetch(`https://Rationality--bach5000.repl.co/login`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({'form': {'username': username, 'password':password}})
-    });
-    const content = await response.json();
-    console.log(content);
-    return content;
-};
-
 export default LoginView;
   
