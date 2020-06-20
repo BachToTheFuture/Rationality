@@ -169,7 +169,7 @@ handleRemove(name, uid, parent) {
         
         <IonContent>
         
-            <h2 className="welcome">{random_greets[Math.floor(Math.random()*3)]}</h2>
+            <h2 className="welcome">Hey there,</h2>
             <h1 className="usertitle"><b>{this.state.loading?"":user_data["success"]["name"]}!</b></h1>
             <div>
               
