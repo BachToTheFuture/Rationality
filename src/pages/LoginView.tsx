@@ -13,8 +13,7 @@ class LoginView extends React.Component {
       showToast: false,
       toastText:""
     }
-    setRedirect = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+    setRedirect = (event: any) => {
       fetch(`https://Rationality--bach5000.repl.co/login`, {
         method: 'POST',
         headers: {
@@ -52,14 +51,14 @@ class LoginView extends React.Component {
           <div className="container">
         <img src="assets/logo.png" height="100"></img>
         <IonTitle size="large" class="usertitle"><b>Rationality</b></IonTitle>
-        <form onSubmit={this.setRedirect}>
+        <form>
             <IonRow>
                 <input className="textbox" onChange={handleUsername} id="username" type="text" name="username" placeholder="Username"></input>
             </IonRow>
             <IonRow>
             <input className="textbox" onChange={handlePassword} id="password" type="password" name="password" placeholder="Password"></input>
             </IonRow>
-            <IonButton type="submit" class="center" shape="round">
+            <IonButton onClick={this.setRedirect} class="center" shape="round">
               <IonIcon slot="start" icon={lockOpen} />
               Login
             </IonButton>

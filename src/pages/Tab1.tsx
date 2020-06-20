@@ -5,7 +5,7 @@ import './Tab1.css';
 import Calendar from 'react-calendar';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
-
+import { Card } from 'react-bootstrap';
 var current_day = "";
 var nice_date_string = "";
 var current_meal = "";
@@ -163,16 +163,18 @@ class Tab1 extends React.Component {
               />
           </div>
           <IonCard>
-            <IonCardHeader>
+            <Card.Header>
                 <IonCardTitle>
                   {nice_date_string}
                 </IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-                <span className={scheduled_meal?"mealname":"hide"}>
-                  You scheduled <b>{scheduled_meal}</b> on this day.
+            </Card.Header>
+            <Card.Body>
+              <div className={scheduled_meal?"mealname":"hide"}>
+                <span>
+                    You scheduled <b>{scheduled_meal}</b> on this day.
                 </span>
                 <hr></hr>
+              </div>
                 <IonItem>
                   <IonLabel>{scheduled_meal?"Change meal":"Schedule a meal"}</IonLabel>
                   <IonSelect onIonChange={(e:any) => {current_meal = e.target.value} }>
@@ -182,7 +184,7 @@ class Tab1 extends React.Component {
                   </IonSelect>
               </IonItem>
               <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">Schedule</IonButton>
-            </IonCardContent>
+            </Card.Body>
           </IonCard>
           <IonToast
             isOpen={this.state.showToast}

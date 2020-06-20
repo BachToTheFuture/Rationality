@@ -4,6 +4,7 @@ import './Tab5.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
+import { Card } from 'react-bootstrap';
 
 var user_data = {}
 var list = [];
@@ -147,11 +148,11 @@ class Tab5 extends React.Component {
               <input placeholder="Type to add item..." className="textbox" type="text" onChange={this.handleChange}></input>
           </IonRow>
         </form>
-          <IonCard>
-            <IonCardHeader>
+          <Card>
+            <Card.Header>
               Showing all items
-            </IonCardHeader>
-            <IonCardContent>
+            </Card.Header>
+            <Card.Body>
               <IonList>
               {list.map((val , i) => (
                 <IonItem key={i}>
@@ -160,8 +161,8 @@ class Tab5 extends React.Component {
                 </IonItem>
               ))}
               </IonList>
-            </IonCardContent>
-          </IonCard>
+            </Card.Body>
+          </Card>
           <IonToast
             isOpen={this.state.showToast}
             onDidDismiss={() => this.setState({showToast:false})}

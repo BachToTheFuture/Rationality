@@ -7,7 +7,7 @@ import { IonSlide, IonSlides, IonToast, IonCard, IonCardHeader, IonCardSubtitle,
 import { helpCircle, ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 import RecipeCard from '../components/RecipeCard';
 
-import { Button, Accordion, Card } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const slideOpts = {
@@ -179,11 +179,11 @@ handleRemove(name, uid, parent) {
           <IonTitle size="large" class="welcome">{random_greets[Math.floor(Math.random()*3)]}</IonTitle>
           <IonTitle size="large" class="usertitle"><b>{user_data["success"]["name"]}!</b></IonTitle>
           <div>
-          <IonCard>
-                <IonCardHeader>
+          <Card>
+                <Card.Header>
                   <IonCardTitle>Welcome!</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent class="welcomeslides">
+                </Card.Header>
+                <Card.Body className="welcomeslides">
                   <IonSlides pager={true} options={slideOpts}>
                     <IonSlide>
                       <div className="welcome-vert-center">
@@ -193,7 +193,7 @@ handleRemove(name, uid, parent) {
                       
                     </IonSlide>
                     <IonSlide>
-                        You can only schedule meals from your favorites! <b>Double tap the heart on the meal card</b> to add it.
+                        You can only schedule meals from your favorites! Double tap the heart on the meal card to add it.
                     </IonSlide>
                     <IonSlide>
                        Add items that you already have in your inventory!
@@ -202,21 +202,21 @@ handleRemove(name, uid, parent) {
                        Items in your shopping list are added automatically when you schedule meals.
                     </IonSlide>
                   </IonSlides>
-                </IonCardContent>
-                <IonCardHeader>
+                </Card.Body>
+                <Card.Header>
                 <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
-                </IonCardHeader>
-              </IonCard>
-            <IonCard>
-                <IonCardHeader>
-                  <IonCardTitle>Your favorites</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
+                </Card.Header>
+              </Card>
+            <Card>
+                <Card.Header>
+                  <Card.Title>Your favorites</Card.Title>
+                </Card.Header>
+                <Card.Body>
                 <Accordion defaultActiveKey="0">
                 {list.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} html={block.html} pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
                 </Accordion>
-                </IonCardContent>
-              </IonCard>
+                </Card.Body>
+              </Card>
           </div>
           <IonToast
             isOpen={this.state.showToast}

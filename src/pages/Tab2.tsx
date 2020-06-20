@@ -4,6 +4,7 @@ import './Tab2.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
+import { Card } from 'react-bootstrap';
 
 var user_data = {}
 var checkboxList = [];
@@ -138,12 +139,12 @@ class Tab2 extends React.Component {
       <IonContent>
         <IonTitle size="large" class="welcome"><b>Shopping List</b></IonTitle>
           <br></br>
-          <IonCard>
-            <IonCardHeader>
+          <Card>
+            <Card.Header>
               Showing list for <b>this week, {start_week}-{end_week}</b>
-            </IonCardHeader>
-            <IonCardContent>
-              <IonList>
+            </Card.Header>
+            <Card.Body>
+              <IonList className={checkboxList.length?"":"hide"}>
               {checkboxList.map(({ val, isChecked }, i) => (
                 <IonItem key={i}>
                   <IonLabel>{val}</IonLabel>
@@ -151,8 +152,8 @@ class Tab2 extends React.Component {
                 </IonItem>
               ))}
               </IonList>
-            </IonCardContent>
-          </IonCard>
+            </Card.Body>
+          </Card>
           <IonToast
             isOpen={this.state.showToast}
             onDidDismiss={() => this.setState({showToast:false})}
