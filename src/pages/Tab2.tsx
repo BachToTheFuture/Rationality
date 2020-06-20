@@ -142,6 +142,7 @@ class Tab2 extends React.Component {
       )
     }
     return (
+      <IonPage>
       <IonContent>
         <h1 className="welcome"><b>Shopping List</b></h1>
           <br></br>
@@ -168,6 +169,7 @@ class Tab2 extends React.Component {
             color="success"
           />
       </IonContent>
+      </IonPage>
     );
   };
 }
