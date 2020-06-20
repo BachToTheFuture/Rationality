@@ -153,7 +153,16 @@ handleRemove(name, uid, parent) {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      this.getData()
+      return (
+        <IonPage>
+          {this.getData()}
+        <IonContent>
+          <div className="container">
+            <IonSpinner className="big-spinner" name="crescent" />
+          </div>
+        </IonContent>
+      </IonPage>
+      )
     }
     return (
       <IonPage>

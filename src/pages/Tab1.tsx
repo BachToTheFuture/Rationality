@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { IonToast, IonButton, IonItem, IonCardTitle, IonCardContent, IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonSpinner } from '@ionic/react';
+import { IonIcon, IonToast, IonButton, IonItem, IonCardTitle, IonCardContent, IonCard, IonCardHeader, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonSpinner } from '@ionic/react';
 import 'react-calendar/dist/Calendar.css';
 import './Tab1.css';
 import Calendar from 'react-calendar';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import { calendar } from 'ionicons/icons';
+
 var current_day = "";
 var nice_date_string = "";
 var current_meal = "";
@@ -131,7 +133,16 @@ class Tab1 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      this.getData()
+      return (
+        <IonPage>
+          {this.getData()}
+        <IonContent>
+          <div className="container">
+            <IonSpinner className="big-spinner" name="crescent" />
+          </div>
+        </IonContent>
+      </IonPage>
+      )
     }
     return (
       <IonPage>
@@ -167,7 +178,8 @@ class Tab1 extends React.Component {
               </IonItem>
               <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">
                 
-                Schedule
+              <IonIcon className="special-icon" icon={calendar}/>
+              <span className="recipe-label special-text"> Schedule </span>
               </IonButton>
             </Card.Body>
           </IonCard>

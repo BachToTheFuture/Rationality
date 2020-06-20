@@ -210,7 +210,16 @@ class Tab4 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      this.getDataInit()
+      return (
+        <IonPage>
+          {this.getDataInit()}
+        <IonContent>
+          <div className="container">
+            <IonSpinner className="big-spinner" name="crescent" />
+          </div>
+        </IonContent>
+      </IonPage>
+      )
     }
     if (this.state.search === 1) {
       return (

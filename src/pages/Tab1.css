@@ -47,11 +47,11 @@
 }
 
 .react-calendar__month-view__days__day:hover {
-  background: none !important;
-  color: white;
+  color: #333;
   font-weight:bold;
   border-radius:5px;
-  border:3px solid #c496ff !important;
+  background: linear-gradient(90deg,#c496ff,#ff8a8a) !important;;
+  border: none !important;
 }
 
 abbr[title] {

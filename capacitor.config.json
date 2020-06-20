@@ -1,6 +1,6 @@
 {
-  "appId": "io.rationality",
-  "appName": "rationality",
+  "appId": "io.hexhax.rationality",
+  "appName": "Rationality",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

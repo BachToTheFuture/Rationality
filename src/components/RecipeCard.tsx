@@ -54,7 +54,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({handleAdd, parent, handleRemove,
     return (
         // Find a way to refresh
         <Card className={pic?"subcard":"subcard"}>
-          <ImageFadeIn src={pic?src:""} height={250} />
+          <ImageFadeIn src={pic?src:""} height={200} />
             
                 
             <div className="card-stuff">

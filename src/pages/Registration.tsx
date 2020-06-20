@@ -61,12 +61,12 @@ class Registration extends React.Component {
             </IonRow>
             <IonRow>
             <IonButton onClick={this.setRedirect} class="center" shape="round">
-              <IonIcon slot="start" icon={personAdd} />
-              Register!
+            <IonIcon className="special-icon" icon={personAdd}/>
+            <span className="recipe-label special-text"> Register </span>
             </IonButton>
             <IonButton href="/" class="center" shape="round" color="tertiary">
-              <IonIcon slot="start" icon={arrowBack} />
-              Go back
+            <IonIcon className="special-icon" icon={arrowBack}/>
+                          <span className="recipe-label special-text"> Go back </span>
             </IonButton>
             </IonRow>
             

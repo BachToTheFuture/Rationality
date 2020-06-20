@@ -59,12 +59,12 @@ class LoginView extends React.Component {
             </IonRow>
             <IonRow>
               <IonButton onClick={this.setRedirect} class="center" shape="round">
-                <IonIcon slot="start" icon={lockOpen} />
-                Login
+                <IonIcon className="special-icon" icon={lockOpen}/>
+                <span className="recipe-label special-text"> Login </span>
               </IonButton>
               <IonButton href="/register" class="center" shape="round" color="tertiary">
-                <IonIcon slot="start" icon={personAdd} />
-                Register
+                <IonIcon className="special-icon" icon={personAdd}/>
+                <span className="recipe-label special-text"> Register </span>
               </IonButton>
             </IonRow>
             

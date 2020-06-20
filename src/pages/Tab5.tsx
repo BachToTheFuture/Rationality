@@ -60,9 +60,6 @@ class Tab5 extends React.Component {
 
   additem = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.setState({
-      loading: 1
-    });
     fetch(`https://Rationality--bach5000.repl.co/invadd`,{
       method: 'POST',
       headers: {
@@ -86,9 +83,7 @@ class Tab5 extends React.Component {
   }
 
   removeitem = (val) => {
-    this.setState({
-      loading: 1
-    });
+
     fetch(`https://Rationality--bach5000.repl.co/invrmv`,{
       method: 'POST',
       headers: {
@@ -103,7 +98,6 @@ class Tab5 extends React.Component {
       console.log(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val);
       console.log(content["success"]["inventory"])
       this.setState({
-        loading: 0,
         toastText: val + " has been removed.",
         showToast: true
       });
@@ -123,7 +117,16 @@ class Tab5 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      this.getData()
+      return (
+        <IonPage>
+          {this.getData()}
+        <IonContent>
+          <div className="container">
+            <IonSpinner className="big-spinner" name="crescent" />
+          </div>
+        </IonContent>
+      </IonPage>
+      )
     }
     return (
       <IonPage>
