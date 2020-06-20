@@ -12,8 +12,11 @@ One of the main causes of food waste is a **consumer’s lack of planning**. Oft
 This app is **not** in the App Store, but you can follow these instructions to get it running on an Apple computer!
 1. Clone/download this repository to your computer.
 2. Navigate into the project folder (not inside the src) and open Terminal.
-3. Execute `ionic capacitor open ios` and it should open XCode. (Make sure you have XCode installed)
-4. Choose any one of the iPhone simulators and run the project in XCode!
+### Want to run it as a web app?
+* Execute `ionic serve` and a browser window should popup with the app running.
+### Want to simulate it on XCode?
+* Execute `ionic capacitor open ios` and it should open XCode. (Make sure you have XCode installed)
+* Choose any one of the iPhone simulators and run the project in XCode!
 
 ## Where do the recipes come from?
-The app uses Wikimedia API to obtain search results from the [Wikibooks Cookbook](https://en.wikibooks.org/wiki/Cookbook:Table_of_Contents) and scraps the recipe and the related information from the pages! A special thanks to Wikibooks for being open source and being accessible :smile:
+The app's backend uses Wikimedia API to obtain search results from the [Wikibooks Cookbook](https://en.wikibooks.org/wiki/Cookbook:Table_of_Contents) and scraps relevant information from the recipe pages! A special thanks to Wikibooks for being open source and being accessible :smile:
