@@ -14,3 +14,6 @@ This app is **not** in the App Store, but you can follow these instructions to g
 2. Navigate into the project folder (not inside the src) and open Terminal.
 3. Execute `ionic capacitor open ios` and it should open XCode. (Make sure you have XCode installed)
 4. Choose any one of the iPhone simulators and run the project in XCode!
+
+## Where do the recipes come from?
+The app uses Wikimedia API to obtain search results from the [Wikibooks Cookbook](https://en.wikibooks.org/wiki/Cookbook:Table_of_Contents) and scraps the recipe and the related information from the pages! A special thanks to Wikibooks for being open source and being accessible :smile:
