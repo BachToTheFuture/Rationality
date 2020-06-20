@@ -141,14 +141,14 @@ class Tab5 extends React.Component {
     return (
       <IonPage>
       <IonContent>
-        <IonTitle size="large" class="welcome"><b>Inventory</b></IonTitle>
+        <h1 className="welcome"><b>Inventory</b></h1>
           <br></br>
           <form onSubmit={this.additem}>
           <IonRow>
               <input placeholder="Type to add item..." className="textbox" type="text" onChange={this.handleChange}></input>
           </IonRow>
         </form>
-          <Card>
+          <IonCard>
             <Card.Header>
               Showing all items
             </Card.Header>
@@ -162,7 +162,7 @@ class Tab5 extends React.Component {
               ))}
               </IonList>
             </Card.Body>
-          </Card>
+          </IonCard>
           <IonToast
             isOpen={this.state.showToast}
             onDidDismiss={() => this.setState({showToast:false})}

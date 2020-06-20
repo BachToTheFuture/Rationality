@@ -232,7 +232,7 @@ class Tab4 extends React.Component {
       return (
         <IonPage>
         <IonContent>
-          <IonTitle size="large" class="welcome"><b>Recipes</b></IonTitle>
+        <h1 className="welcome"><b>Recipes</b></h1>
           <br></br>
           <div className="container">
             <IonSpinner className="big-spinner" name="crescent" />
@@ -244,7 +244,7 @@ class Tab4 extends React.Component {
     return (
       <IonPage>
       <IonContent>
-        <IonTitle size="large" class="welcome"><b>Recipes</b></IonTitle>
+        <h1 className="welcome"><b>Recipes</b></h1>
         <br></br>
           <div>
           <form onSubmit={this.search}>

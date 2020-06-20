@@ -149,12 +149,7 @@ class Tab1 extends React.Component {
     return (
       <IonPage>
         <IonContent>
-        <IonTitle size="large" class="welcome"><b>Calendar</b></IonTitle>
-          <IonHeader collapse="condense">
-            <IonToolbar>
-              <IonTitle size="large">Tab 1</IonTitle>
-            </IonToolbar>
-          </IonHeader>
+        <h1 className="welcome"><b>Calendar</b></h1>
           <div>
             <Calendar
               onChange={this.onChange}

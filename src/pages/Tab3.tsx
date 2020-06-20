@@ -3,7 +3,7 @@ import { IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/reac
 import './Tab3.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
-import { IonSlide, IonSlides, IonToast, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
+import { IonRow, IonHeader, IonSlide, IonSlides, IonToast, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
 import { helpCircle, ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 import RecipeCard from '../components/RecipeCard';
 
@@ -176,15 +176,32 @@ handleRemove(name, uid, parent) {
     return (
       <IonPage>
         <IonContent>
-          <IonTitle size="large" class="welcome">{random_greets[Math.floor(Math.random()*3)]}</IonTitle>
-          <IonTitle size="large" class="usertitle"><b>{user_data["success"]["name"]}!</b></IonTitle>
-          <div>
-          <Card>
-                <Card.Header>
-                  <IonCardTitle>Welcome!</IonCardTitle>
-                </Card.Header>
-                <Card.Body className="welcomeslides">
-                  <IonSlides pager={true} options={slideOpts}>
+            <h2 className="welcome">{random_greets[Math.floor(Math.random()*3)]}</h2>
+            <h1 className="usertitle"><b>{user_data["success"]["name"]}!</b></h1>
+            <div>
+              <Accordion defaultActiveKey="0">
+                
+                <IonCard>
+                  
+
+                <Card.Body>
+                  <b className="quickactions">Quick actions</b>
+                <IonRow>
+                    <Accordion.Toggle as="div" eventKey="help">
+                      <IonButton>
+                        <IonIcon className="special-icon" icon={helpCircle}/>
+                        <span className="recipe-label special-text"> Help </span>
+                      </IonButton>
+
+                    </Accordion.Toggle>
+                   
+                  
+                    <IonButton color="tertiary" onClick={this.logout} href="/" >Sign Out</IonButton>
+                    
+                  </IonRow>
+                
+                <Accordion.Collapse eventKey="help">
+                <IonSlides pager={true} options={slideOpts}>
                     <IonSlide>
                       <div className="welcome-vert-center">
                         <IonIcon className="special-icon help-icon" icon={helpCircle} />
@@ -202,21 +219,14 @@ handleRemove(name, uid, parent) {
                        Items in your shopping list are added automatically when you schedule meals.
                     </IonSlide>
                   </IonSlides>
+                </Accordion.Collapse>
                 </Card.Body>
-                <Card.Header>
-                <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
-                </Card.Header>
-              </Card>
-            <Card>
-                <Card.Header>
-                  <Card.Title>Your favorites</Card.Title>
-                </Card.Header>
-                <Card.Body>
+              </IonCard>
+              </Accordion>
+            
                 <Accordion defaultActiveKey="0">
-                {list.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} html={block.html} pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+                {list.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} html={block.html} pic={true} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
                 </Accordion>
-                </Card.Body>
-              </Card>
           </div>
           <IonToast
             isOpen={this.state.showToast}

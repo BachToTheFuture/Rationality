@@ -10,10 +10,20 @@
  } 
 
 ion-slides {
-    min-height:120px;
+    min-height:140px;
 }
 
 .welcome-vert-center {
-    padding-top:10%;
+    padding-top:5%;
     padding-bottom:auto;
+}
+
+.quickactions {
+    font-size:17px;
+}
+
+ion-card {
+    width: 100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
 }

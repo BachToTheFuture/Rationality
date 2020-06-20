@@ -137,9 +137,9 @@ class Tab2 extends React.Component {
     }
     return (
       <IonContent>
-        <IonTitle size="large" class="welcome"><b>Shopping List</b></IonTitle>
+        <h1 className="welcome"><b>Shopping List</b></h1>
           <br></br>
-          <Card>
+          <IonCard>
             <Card.Header>
               Showing list for <b>this week, {start_week}-{end_week}</b>
             </Card.Header>
@@ -153,7 +153,7 @@ class Tab2 extends React.Component {
               ))}
               </IonList>
             </Card.Body>
-          </Card>
+          </IonCard>
           <IonToast
             isOpen={this.state.showToast}
             onDidDismiss={() => this.setState({showToast:false})}
