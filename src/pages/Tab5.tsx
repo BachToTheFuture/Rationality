@@ -4,6 +4,7 @@ import './Tab5.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
+import { Card } from 'react-bootstrap';
 
 var user_data = {}
 var list = [];
@@ -26,12 +27,9 @@ class Tab5 extends React.Component {
   }
 
   onRouteChanged() {
+    console.log("JUST OPENED TAB5")
     this.setState({
       loading: 1
-    })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
     })
   }
 
@@ -102,7 +100,6 @@ class Tab5 extends React.Component {
       user_data = content;
       set("login", user_data);
       list.splice(list.indexOf(val), 1);
-      console.log("NEW INV")
       console.log(`https://Rationality--bach5000.repl.co/invrmv/`+user_data["success"]["_id"]+"/"+val);
       console.log(content["success"]["inventory"])
       this.setState({
@@ -126,21 +123,12 @@ class Tab5 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getData()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getData()
     }
     return (
       <IonPage>
       <IonContent>
-        <IonTitle size="large" class="welcome"><b>Inventory</b></IonTitle>
+        <h1 className="welcome"><b>Inventory</b></h1>
           <br></br>
           <form onSubmit={this.additem}>
           <IonRow>
@@ -148,19 +136,19 @@ class Tab5 extends React.Component {
           </IonRow>
         </form>
           <IonCard>
-            <IonCardHeader>
+            <Card.Header>
               Showing all items
-            </IonCardHeader>
-            <IonCardContent>
+            </Card.Header>
+            <Card.Body>
               <IonList>
               {list.map((val , i) => (
                 <IonItem key={i}>
                   <IonLabel>{val}</IonLabel>
-                  <a onClick={(e)=>this.removeitem(val)}>{"×"}</a>
+                  <a style={{fontSize:"30px", fontWeight:"bold"}} onClick={(e)=>this.removeitem(val)}>{"×"}</a>
                 </IonItem>
               ))}
               </IonList>
-            </IonCardContent>
+            </Card.Body>
           </IonCard>
           <IonToast
             isOpen={this.state.showToast}

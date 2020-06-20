@@ -1,13 +1,14 @@
 import React from 'react';
-import { IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
+import { CreateAnimation } from '@ionic/react';
+import { IonPopover, IonSpinner, IonContent, IonPage, IonTitle, IonButton} from '@ionic/react';
 import './Tab3.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
-import { IonSlide, IonSlides, IonToast, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
-import { helpCircle, ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
+import { IonRow, IonHeader, IonSlide, IonSlides, IonToast, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel } from '@ionic/react';
+import { arrowBack, helpCircle, ellipse, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 import RecipeCard from '../components/RecipeCard';
 
-import { Button, Accordion, Card } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const slideOpts = {
@@ -31,7 +32,9 @@ class Tab3 extends React.Component {
     loading: 1,
     update: "",
     showToast: false,
-    toastText: ""
+    toastText: "",
+    showPopover: false,
+
   }
   componentDidUpdate(prevProps) {
     if (this.props["location"] !== prevProps.location) {
@@ -42,10 +45,6 @@ class Tab3 extends React.Component {
   onRouteChanged() {
     this.setState({
       loading: 1
-    })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
     })
   }
 
@@ -99,9 +98,6 @@ class Tab3 extends React.Component {
             // Update user data
             user_data = content;
             // Update state
-            parent.setState({
-              update: name
-            });
             // Update data
             list.forEach((x, n)=>{
               if (x.name === name)
@@ -133,9 +129,6 @@ handleRemove(name, uid, parent) {
             user_data = content;
             console.log("REMOVED")
             // Update state
-            parent.setState({
-              update: name
-            });
             // Update data
             list.forEach((x, n)=>{
               if (x.name === name)
@@ -156,35 +149,27 @@ handleRemove(name, uid, parent) {
 
   render () {
     // redirect to login.
-    console.log("DATA STUFF")
-    console.log(list);
     if (this.state.loading === -1) {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getData()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getData()
     }
     return (
       <IonPage>
+        
         <IonContent>
-          <IonTitle size="large" class="welcome">{random_greets[Math.floor(Math.random()*3)]}</IonTitle>
-          <IonTitle size="large" class="usertitle"><b>{user_data["success"]["name"]}!</b></IonTitle>
-          <div>
-          <IonCard>
-                <IonCardHeader>
-                  <IonCardTitle>Welcome!</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent class="welcomeslides">
-                  <IonSlides pager={true} options={slideOpts}>
+        
+            <h2 className="welcome">{random_greets[Math.floor(Math.random()*3)]}</h2>
+            <h1 className="usertitle"><b>{this.state.loading?"":user_data["success"]["name"]}!</b></h1>
+            <div>
+              
+            <IonPopover
+                isOpen={this.state.showPopover}
+                cssClass='my-custom-class'
+                onDidDismiss={e => this.setState({showPopover: false})}
+              >
+                <IonSlides pager={true} options={slideOpts}>
                     <IonSlide>
                       <div className="welcome-vert-center">
                         <IonIcon className="special-icon help-icon" icon={helpCircle} />
@@ -193,7 +178,7 @@ handleRemove(name, uid, parent) {
                       
                     </IonSlide>
                     <IonSlide>
-                        You can only schedule meals from your favorites! <b>Double tap the heart on the meal card</b> to add it.
+                        You can only schedule meals from your favorites! Tap the heart on the meal card to add it.
                     </IonSlide>
                     <IonSlide>
                        Add items that you already have in your inventory!
@@ -202,21 +187,25 @@ handleRemove(name, uid, parent) {
                        Items in your shopping list are added automatically when you schedule meals.
                     </IonSlide>
                   </IonSlides>
-                </IonCardContent>
-                <IonCardHeader>
-                <IonButton onClick={this.logout} class="center" href="/" color="tertiary" shape="round">Sign Out</IonButton>
-                </IonCardHeader>
-              </IonCard>
-            <IonCard>
-                <IonCardHeader>
-                  <IonCardTitle>Your favorites</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
+            </IonPopover>
+
+                  <IonRow>
+                    <div className="buttons-group">
+                    <IonButton onClick={() => this.setState({showPopover: true})}>
+                          <IonIcon className="special-icon" icon={helpCircle}/>
+                          <span className="recipe-label special-text"> Help </span>
+                        </IonButton>
+                   
+                      <IonButton color="tertiary" onClick={this.logout} href="/" >
+                      <IonIcon className="special-icon" icon={arrowBack}/>
+                          <span className="recipe-label special-text"> Sign Out </span>
+                      </IonButton>
+                    </div>
+                        
+                    </IonRow>
                 <Accordion defaultActiveKey="0">
-                {list.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} html={block.html} pic={false} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
+                {list.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} html={block.html} pic={true} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
                 </Accordion>
-                </IonCardContent>
-              </IonCard>
           </div>
           <IonToast
             isOpen={this.state.showToast}
@@ -225,6 +214,7 @@ handleRemove(name, uid, parent) {
             duration={2000}
             color="success"
           />
+          
         </IonContent>
       </IonPage>
     );

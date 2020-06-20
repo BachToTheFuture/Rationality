@@ -35,10 +35,6 @@ class Tab4 extends React.Component {
     this.setState({
       loading: 1
     })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
-    })
   }
 
   getDataInit () {
@@ -99,9 +95,6 @@ class Tab4 extends React.Component {
               // Update user data
               user_data = content;
               // Update state
-              parent.setState({
-                update: name
-              });
               // Update data
               data.forEach((x, n)=>{
                 if (x.name === name)
@@ -217,23 +210,20 @@ class Tab4 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getDataInit()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getDataInit()
     }
     if (this.state.search === 1) {
       return (
         <IonPage>
         <IonContent>
-          <IonTitle size="large" class="welcome"><b>Recipes</b></IonTitle>
+        <h1 className="welcome"><b>Recipes</b></h1>
           <br></br>
+          <IonRow>
+              <input placeholder={query} className="textbox" type="text"></input>
+          </IonRow>
+          <div className="query-text">
+            Getting recipes...
+          </div>
           <div className="container">
             <IonSpinner className="big-spinner" name="crescent" />
           </div>
@@ -244,7 +234,7 @@ class Tab4 extends React.Component {
     return (
       <IonPage>
       <IonContent>
-        <IonTitle size="large" class="welcome"><b>Recipes</b></IonTitle>
+        <h1 className="welcome"><b>Recipes</b></h1>
         <br></br>
           <div>
           <form onSubmit={this.search}>

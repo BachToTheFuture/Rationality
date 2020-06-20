@@ -5,7 +5,7 @@ import './Tab1.css';
 import Calendar from 'react-calendar';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
-
+import { Card } from 'react-bootstrap';
 var current_day = "";
 var nice_date_string = "";
 var current_meal = "";
@@ -93,10 +93,6 @@ class Tab1 extends React.Component {
     this.setState({
       loading: 1
     })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
-    })
   }
 
   getData () {
@@ -135,26 +131,12 @@ class Tab1 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getData()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getData()
     }
     return (
       <IonPage>
         <IonContent>
-        <IonTitle size="large" class="welcome"><b>Calendar</b></IonTitle>
-          <IonHeader collapse="condense">
-            <IonToolbar>
-              <IonTitle size="large">Tab 1</IonTitle>
-            </IonToolbar>
-          </IonHeader>
+        <h1 className="welcome"><b>Calendar</b></h1>
           <div>
             <Calendar
               onChange={this.onChange}
@@ -163,16 +145,18 @@ class Tab1 extends React.Component {
               />
           </div>
           <IonCard>
-            <IonCardHeader>
+            <Card.Header>
                 <IonCardTitle>
                   {nice_date_string}
                 </IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-                <span className={scheduled_meal?"mealname":"hide"}>
-                  You scheduled <b>{scheduled_meal}</b> on this day.
+            </Card.Header>
+            <Card.Body>
+              <div className={scheduled_meal?"mealname":"hide"}>
+                <span>
+                    You scheduled <b>{scheduled_meal}</b> on this day.
                 </span>
                 <hr></hr>
+              </div>
                 <IonItem>
                   <IonLabel>{scheduled_meal?"Change meal":"Schedule a meal"}</IonLabel>
                   <IonSelect onIonChange={(e:any) => {current_meal = e.target.value} }>
@@ -181,8 +165,11 @@ class Tab1 extends React.Component {
                     ))}
                   </IonSelect>
               </IonItem>
-              <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">Schedule</IonButton>
-            </IonCardContent>
+              <IonButton onClick={(e)=>this.handleSchedule(user_data["success"]["_id"], current_day, current_meal)} class="center" color="tertiary" shape="round">
+                
+                Schedule
+              </IonButton>
+            </Card.Body>
           </IonCard>
           <IonToast
             isOpen={this.state.showToast}

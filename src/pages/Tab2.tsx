@@ -4,6 +4,7 @@ import './Tab2.css';
 import { set, get } from "../storage";
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
+import { Card } from 'react-bootstrap';
 
 var user_data = {}
 var checkboxList = [];
@@ -34,11 +35,7 @@ class Tab2 extends React.Component {
 
   onRouteChanged() {
     this.setState({
-      loading: 1,
-    })
-    this.getData()
-    this.setState({
-      loading: 2 + Math.random()
+      loading: 1
     })
   }
 
@@ -60,6 +57,7 @@ class Tab2 extends React.Component {
             console.log(e.detail.checked);
             // Remove object
             delete checkboxList[i];
+            
             this.setState({
               update: val,
               toastText: "Added " + val + " to inventory",
@@ -79,11 +77,11 @@ class Tab2 extends React.Component {
         });
         // Update shoping list
         let test = []
-
-        let now = new Date();
+        console.log(user_data["success"].shopping_list);
         Object.keys(user_data["success"].shopping_list).forEach(item=>{
           let date = user_data["success"].shopping_list[item]
           let t = checkWeek(date);
+          console.log("CHECK IF SAME WEEK" + t)
           if (t) {
               test.push({val: item, isChecked: false})
           }
@@ -101,7 +99,7 @@ class Tab2 extends React.Component {
           }
         })
         */
-
+        console.log(test);
         checkboxList = test;
       }
       // This makes it redirect to login.
@@ -123,26 +121,19 @@ class Tab2 extends React.Component {
       return <Redirect to="/" exact />
     }
     if (this.state.loading === 1) {
-      return (
-        <IonPage>
-          {this.getData()}
-        <IonContent>
-          <div className="container">
-            <IonSpinner className="big-spinner" name="crescent" />
-          </div>
-        </IonContent>
-      </IonPage>
-      )
+      this.getData()
     }
     return (
+      <IonPage>
+
       <IonContent>
-        <IonTitle size="large" class="welcome"><b>Shopping List</b></IonTitle>
+        <h1 className="welcome"><b>Shopping List</b></h1>
           <br></br>
           <IonCard>
-            <IonCardHeader>
+            <Card.Header>
               Showing list for <b>this week, {start_week}-{end_week}</b>
-            </IonCardHeader>
-            <IonCardContent>
+            </Card.Header>
+            <Card.Body>
               <IonList>
               {checkboxList.map(({ val, isChecked }, i) => (
                 <IonItem key={i}>
@@ -151,7 +142,7 @@ class Tab2 extends React.Component {
                 </IonItem>
               ))}
               </IonList>
-            </IonCardContent>
+            </Card.Body>
           </IonCard>
           <IonToast
             isOpen={this.state.showToast}
@@ -161,6 +152,7 @@ class Tab2 extends React.Component {
             color="success"
           />
       </IonContent>
+      </IonPage>
     );
   };
 }

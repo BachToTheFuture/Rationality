@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { IonToast, IonRow, IonButton, IonIcon, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonItemDivider } from '@ionic/react';
-import { ellipse, lockOpen, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
+import { personAdd, ellipse, lockOpen, statsChart, nutrition, newspaper, triangle, calendar, personCircle } from 'ionicons/icons';
 
 import { set } from "../storage";
 import "./LoginView.css";
@@ -13,8 +13,7 @@ class LoginView extends React.Component {
       showToast: false,
       toastText:""
     }
-    setRedirect = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+    setRedirect = (event: any) => {
       fetch(`https://Rationality--bach5000.repl.co/login`, {
         method: 'POST',
         headers: {
@@ -50,23 +49,25 @@ class LoginView extends React.Component {
          <div>
           {this.renderRedirect()}
           <div className="container">
-        <img src="assets/logo.png" height="100"></img>
-        <IonTitle size="large" class="usertitle"><b>Rationality</b></IonTitle>
-        <form onSubmit={this.setRedirect}>
+        <img className="logo" src="assets/Rationality.png" height="60"></img>
+        <form>
             <IonRow>
                 <input className="textbox" onChange={handleUsername} id="username" type="text" name="username" placeholder="Username"></input>
             </IonRow>
             <IonRow>
             <input className="textbox" onChange={handlePassword} id="password" type="password" name="password" placeholder="Password"></input>
             </IonRow>
-            <IonButton type="submit" class="center" shape="round">
-              <IonIcon slot="start" icon={lockOpen} />
-              Login
-            </IonButton>
-            <IonButton href="/register" class="center" shape="round" color="tertiary">
-              <IonIcon slot="start" icon={lockOpen} />
-              Register
-            </IonButton>
+            <IonRow>
+              <IonButton onClick={this.setRedirect} class="center" shape="round">
+                <IonIcon slot="start" icon={lockOpen} />
+                Login
+              </IonButton>
+              <IonButton href="/register" class="center" shape="round" color="tertiary">
+                <IonIcon slot="start" icon={personAdd} />
+                Register
+              </IonButton>
+            </IonRow>
+            
             
         </form>
         </div>
