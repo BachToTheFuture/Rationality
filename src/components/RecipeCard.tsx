@@ -11,9 +11,9 @@ import ImageFadeIn from "react-image-fade-in";
 import sanitizeHtml from "sanitize-html"
 import { Redirect } from 'react-router-dom';
 const defaultOptions = {
-  allowedTags: [ 'b', 'i', 'li', 'h2', 'h1', 'h3', 'h4', 'h5', 'p', 'div', 'em', 'strong', 'a' ],
+  allowedTags: [ 'b', 'i', 'li', 'h2', 'ul', 'tr','th', 'tbody', 'h1', 'h3', 'h4', 'h5', 'p', 'div', 'em', 'strong', 'a' ],
   allowedAttributes: {
-    'a': [ 'href' ]
+    'a': [ 'href' ],
   },
   allowedIframeHostnames: ['www.youtube.com']
 };

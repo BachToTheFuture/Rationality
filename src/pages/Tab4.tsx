@@ -179,6 +179,7 @@ class Tab4 extends React.Component {
     .then(response => response.json()).then(content => {
       let test = [];
       Object.keys(content).forEach(x=>{
+        console.log(content[x])
         test.push({
           component: "RecipeCard",
           name: x,
