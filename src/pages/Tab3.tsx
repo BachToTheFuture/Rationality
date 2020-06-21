@@ -212,6 +212,29 @@ handleRemove(name, uid, parent) {
                     </div>
                         
                     </IonRow>
+
+                  <IonCard className={list.length===0?"":"hide"}>
+                    <Card.Body>
+                        <IonSlides pager={true} options={slideOpts}>
+                        <IonSlide>
+                          <div className="welcome-vert-center">
+                            <IonIcon className="special-icon help-icon" icon={helpCircle} />
+                            <span className="special-text">Swipe to see some <b>helpful hints</b>!</span>
+                          </div>
+                          
+                        </IonSlide>
+                        <IonSlide>
+                            You can only schedule meals from your favorites! Tap the heart on the meal card to add it.
+                        </IonSlide>
+                        <IonSlide>
+                          Add items that you already have in your inventory!
+                        </IonSlide>
+                        <IonSlide>
+                          Items in your shopping list are added automatically when you schedule meals.
+                        </IonSlide>
+                      </IonSlides>
+                    </Card.Body>
+                  </IonCard>
                 <Accordion defaultActiveKey="0">
                 {list.map(block => <RecipeCard parent={this} handleAdd={this.handleAdd} handleRemove={this.handleRemove} html={block.html} pic={true} uid={this.state.loading?"":user_data["success"]["_id"]} key={Math.random()*1000} name={block.name} time={block.time} diff={block.diff} serv={block.serv} favorite={block.favorite}/>)}
                 </Accordion>
