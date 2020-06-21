@@ -9,7 +9,7 @@ One of the main causes of food waste is a **consumer’s lack of planning**. Oft
 **Rationality aims toward reducing the large amounts of food waste** - that often end up in landfills and combustion facilities - with the help of an app that allows the user to plan out what meals they would like to have in the course of week. The user selects recipes and assigns them to a date in the calendar. Then, a shopping list is generated with all the ingredients needed to prepare the meals- no more, no less. The user can also input ingredients they already have in the inventory page. That way, an ingredient is only added to the shopping list if it is not already in the inventory. Once an item is checked off of the shopping list, it is automatically added to the inventory. Rationality also offers a recipe page where the user can explore new foods and get a better idea of what they would like to eat. If the user finds a recipe they love, they can add it to their favorites for easy access.
 
 ## How can I try this app?
-This app is **not** in the App Store, but you can follow these instructions to get it running on an Apple computer!
+This app is **not** in the App Store, but you can follow these instructions to get it running on your computer (preferrably an Apple computer)!
 1. Clone/download this repository to your computer.
 2. Navigate into the project folder (not inside the src) and open Terminal.
 ### Want to run it as a web app?
