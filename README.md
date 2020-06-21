@@ -14,9 +14,10 @@ This app is **not** in the App Store, but you can follow these instructions to g
 2. Navigate into the project folder (not inside the src) and open Terminal.
 ### Want to run it as a web app?
 * Execute `ionic serve` and a browser window should popup with the app running.
-### Want to simulate it on XCode?
-* Execute `ionic capacitor open ios` and it should open XCode. (Make sure you have XCode installed)
-* Choose any one of the iPhone simulators and run the project in XCode!
+### Want to simulate it on Xcode?
+* Execute `ionic capacitor copy ios` to build (Make sure you have Xcode installed)
+* Execute `ionic capacitor open ios` to open the project in Xcode.
+* Choose any one of the iPhone simulators and run the project!
 
 ## Where do the recipes come from?
 The app's backend uses Wikimedia API to obtain search results from the [Wikibooks Cookbook](https://en.wikibooks.org/wiki/Cookbook:Table_of_Contents) and scraps relevant information from the recipe pages! A special thanks to Wikibooks for being open source and being accessible :smile:
